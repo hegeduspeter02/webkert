@@ -88,6 +88,23 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "webkert-projekt:build:production",
+              "serveTarget": "webkert-projekt:serve:production"
+            },
+            "development": {
+              "buildTarget": "webkert-projekt:build:development",
+              "serveTarget": "webkert-projekt:serve:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

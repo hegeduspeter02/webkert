@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "webkert-projekt-6d4aa": {
+      "hosting": {
+        "webkert-projekt": [
+          "webkert-projekt-6d4aa"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "webkert-projekt-6d4aa"
+  }
+}
