@@ -20,7 +20,6 @@ export class TableComponent {
     colHeaders: true,
     rowHeaders: true,
     stretchH: 'all',
-    height: 400,
     licenseKey: 'non-commercial-and-evaluation'
   };
 }
