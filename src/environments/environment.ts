@@ -6,6 +6,5 @@ export const environment = {
     storageBucket: "webkert-projekt-6d4aa.appspot.com",
     messagingSenderId: "317316140798",
     appId: "1:317316140798:web:0939db8eb5286e2a209faf",
-    measurementId: "G-7EJBKGS5FB"
   }
 };
