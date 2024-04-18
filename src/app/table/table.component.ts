@@ -4,7 +4,6 @@ import {registerAllModules} from "handsontable/registry";
 import {TableService} from "../Services/table.service";
 import {Gyufacimke} from "../Entities/Gyufacimke";
 import {HotTableModule} from "@handsontable/angular";
-import {toArray} from "rxjs";
 
 // register Handsontable's modules
 registerAllModules();
@@ -16,9 +15,10 @@ registerAllModules();
   standalone: true,
   styleUrl: './table.component.css'
 })
-export class TableComponent implements OnInit{
+export class TableComponent implements OnInit {
+  tableService = inject(TableService);
   ngOnInit(): void {
-      this.getData();
+    this.getData();
   }
 
   hotSettings: Handsontable.GridSettings = {
@@ -29,7 +29,7 @@ export class TableComponent implements OnInit{
     rowHeaders: true,
     stretchH: 'all',
     licenseKey: 'non-commercial-and-evaluation',
-    fixedColumnsStart: 4,
+    fixedColumnsStart: 22,
     autoWrapRow: true,
     autoWrapCol: true,
     manualColumnFreeze: true,
@@ -37,8 +37,11 @@ export class TableComponent implements OnInit{
     filters: true,
     dropdownMenu: true,
   };
+  gyufacimkeData: any[][];
 
-  tableService = inject(TableService);
+  constructor() {
+    this.gyufacimkeData = [];
+  }
 
   addData(gyufacimke: Gyufacimke) {
     this.tableService.addGyufacimke(gyufacimke).subscribe({
@@ -49,14 +52,13 @@ export class TableComponent implements OnInit{
 
   getData() {
     // let gyufacimke = new Gyufacimke(1, 10, 20, new Date(), '20', 10, 10, "nev", ["jo", "rossz"], "10", "10", 2010, "comment", "id", new Date(), "neve", 20, 30, "no", "megjegyzes", 40, "id");
-
     this.tableService.getAll().subscribe(gyufacimkek => {
-      this.hotSettings.data = gyufacimkek.map(gyufacimke => {
+      this.gyufacimkeData = gyufacimkek.map(gyufacimke => {
         const values = Object.values(gyufacimke);
-        return [...values, ...new Array(values.length)];
+        return [...values];
       });
-      console.log(this.hotSettings.data);
-      console.log(gyufacimkek);
+
+
     })
   }
 }
