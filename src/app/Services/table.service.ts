@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {Firestore, collection, collectionData, addDoc} from "@angular/fire/firestore";
 import {Gyufacimke} from "../Entities/Gyufacimke";
-import {from, Observable} from "rxjs";
+import {from, map, Observable} from "rxjs";
 import {Orszag} from "../Entities/Orszag";
 
 @Injectable({
@@ -12,10 +12,12 @@ export class TableService {
   orszagokCollection = collection(this.firestore, 'orszagok');
   gyufacimkeCollection = collection(this.firestore, 'gyufacimke');
 
-  getOrszagok(): Observable<Orszag[]>{
-    return collectionData(this.orszagokCollection,
+  getAll(): Observable<Gyufacimke[]>{
+    return collectionData(this.gyufacimkeCollection,
       {idField: 'id'
-      }) as Observable<Orszag[]>;
+      }).pipe(
+      map(docs => docs.map(Gyufacimke.fromFirestore))
+    ) as Observable<Gyufacimke[]>;
   }
 
   addGyufacimke(gyufacimke: Gyufacimke):Observable<void>{

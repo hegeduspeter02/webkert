@@ -74,6 +74,33 @@ export class Gyufacimke {
     }
   }
 
+  static fromFirestore(doc: any): Gyufacimke {
+    return new Gyufacimke(
+      doc.sorszam,
+      doc.digitalizalasi_azon,
+      doc.adatb_azon,
+      doc.nyilv_vetel_datum,
+      doc.tipus_id,
+      doc.meret_x,
+      doc.meret_y,
+      doc.megnevezes,
+      doc.kulcsszavak,
+      doc.orszag_id,
+      doc.helyseg_id,
+      doc.ev,
+      doc.cimke_megjegyzes,
+      doc.nyilvantartas_id,
+      doc.beszerzesi_datum,
+      doc.elado_neve,
+      doc.bekerulesi_ertek,
+      doc.jarulekos_koltseg,
+      doc.tarolasi_infomacio,
+      doc.vetel_megjegyzes,
+      doc.becsult_ertek,
+      doc.eladas_csere_id
+    );
+  }
+
   get sorszam(): number {
     return this._sorszam;
   }
