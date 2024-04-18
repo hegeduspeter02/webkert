@@ -28,8 +28,13 @@ export class TableComponent{
   getData(){
     let gyufacimke = new Gyufacimke(1, 10, 20, new Date(), '20', 10, 10, "nev", ["jo", "rossz"], "10", "10", 2010, "comment", "id", new Date(), "neve", 20, 30, "no", "megjegyzes", 40, "id");
 
-    this.tableService.getOrszagok().subscribe(orszagok => {
-      console.log(orszagok);
-    })
+    // this.tableService.getOrszagok().subscribe(orszagok => {
+    //   console.log(orszagok);
+    // })
+
+    this.tableService.addGyufacimke(gyufacimke).subscribe({
+      complete: () => console.log('Sikeres mentés'),
+      error: err => console.error('Hiba történt', err)
+    });
   }
 }

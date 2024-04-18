@@ -47,6 +47,33 @@ export class Gyufacimke {
     this._eladas_csere_id = eladas_csere_id;
   }
 
+  toPlainObject() {
+    return {
+      sorszam: this._sorszam,
+      digitalizalasi_azon: this._digitalizalasi_azon,
+      adatb_azon: this._adatb_azon,
+      nyilv_vetel_datum: this._nyilv_vetel_datum,
+      tipus_id: this._tipus_id,
+      meret_x: this._meret_x,
+      meret_y: this._meret_y,
+      megnevezes: this._megnevezes,
+      kulcsszavak: this._kulcsszavak,
+      orszag_id: this._orszag_id,
+      helyseg_id: this._helyseg_id,
+      ev: this._ev,
+      cimke_megjegyzes: this._cimke_megjegyzes,
+      nyilvantartas_id: this._nyilvantartas_id,
+      beszerzesi_datum: this._beszerzesi_datum,
+      elado_neve: this._elado_neve,
+      bekerulesi_ertek: this._bekerulesi_ertek,
+      jarulekos_koltseg: this._jarulekos_koltseg,
+      tarolasi_infomacio: this._tarolasi_infomacio,
+      vetel_megjegyzes: this._vetel_megjegyzes,
+      becsult_ertek: this._becsult_ertek,
+      eladas_csere_id: this._eladas_csere_id
+    }
+  }
+
   get sorszam(): number {
     return this._sorszam;
   }
