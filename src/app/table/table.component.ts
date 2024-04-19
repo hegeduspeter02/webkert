@@ -63,7 +63,7 @@ export class TableComponent implements OnInit {
     this.gyufacimkeOutputData = this.hotRegisterer.getInstance(this.tableId).getData();
 
     let gyufacimkeOutputObjects = this.gyufacimkeOutputData.map(gyufacimke => {
-      return new Gyufacimke(
+      let gyufacimkeObject = new Gyufacimke(
         gyufacimke[0],
         gyufacimke[1],
         gyufacimke[2],
@@ -88,6 +88,21 @@ export class TableComponent implements OnInit {
         gyufacimke[21],
         gyufacimke[22]
       )
+
+      if (gyufacimkeObject.tipus === 'Palást') {
+        gyufacimkeObject.tipus = `cimke_tipusok/${this.cimkeTipusok.find(cimkeTipus => cimkeTipus.nev === 'Palást')?.rovidites}`;
+      }
+      else if(gyufacimkeObject.tipus === 'Normál') {
+        gyufacimkeObject.tipus = `cimke_tipusok/${this.cimkeTipusok.find(cimkeTipus => cimkeTipus.nev === 'Normál')?.rovidites}`;
+      }
+      else if(gyufacimkeObject.tipus === 'Csomag') {
+        gyufacimkeObject.tipus = `cimke_tipusok/${this.cimkeTipusok.find(cimkeTipus => cimkeTipus.nev === 'Csomag')?.rovidites}`;
+      }
+      else{
+        gyufacimkeObject.tipus = `cimke_tipusok/${this.cimkeTipusok.find(cimkeTipus => cimkeTipus.nev === 'Egyéb')?.rovidites}`;
+      }
+
+      return gyufacimkeObject;
     });
 
     this.tableService.saveGyufacimke(gyufacimkeOutputObjects).subscribe({
