@@ -4,6 +4,7 @@ import {registerAllModules} from "handsontable/registry";
 import {TableService} from "../Services/table.service";
 import {Gyufacimke} from "../Entities/Gyufacimke";
 import {HotTableModule} from "@handsontable/angular";
+import {DatePipe} from "@angular/common";
 
 // register Handsontable's modules
 registerAllModules();
@@ -17,27 +18,31 @@ registerAllModules();
 })
 export class TableComponent implements OnInit {
   tableService = inject(TableService);
+
   ngOnInit(): void {
     this.getData();
   }
 
   hotSettings: Handsontable.GridSettings = {
-    colHeaders: ['Sorszám', 'Digitális azonosító', 'Adatbázis azonosító', 'Nyilvántartásba vétel dátum', 'Típus',
-      'Méret x', 'Méret y', 'Megnevezés', 'Kulcsszavak', 'Ország', 'Helység',
-      'Év', 'Megjegyzés', 'Nyilvántartás', 'Beszerzési dátum', 'Eladó/Partner neve', 'Bekerülési érték',
-      'Járulékos költség', 'Tárolási információ', 'Vétel megjegyzés', 'Becsült érték', 'Eladás/Csere'],
     rowHeaders: true,
     stretchH: 'all',
     licenseKey: 'non-commercial-and-evaluation',
-    fixedColumnsStart: 22,
     autoWrapRow: true,
     autoWrapCol: true,
-    manualColumnFreeze: true,
     contextMenu: true,
     filters: true,
     dropdownMenu: true,
+    columns: [
+      {
+        type: 'numeric',
+        numericFormat: {
+          pattern: '$0,0.00',
+        },
+        allowEmpty: false,
+      }
+    ]
   };
-  gyufacimkeData: any[][];
+  gyufacimkeData: Gyufacimke[];
 
   constructor() {
     this.gyufacimkeData = [];
@@ -54,11 +59,8 @@ export class TableComponent implements OnInit {
     // let gyufacimke = new Gyufacimke(1, 10, 20, new Date(), '20', 10, 10, "nev", ["jo", "rossz"], "10", "10", 2010, "comment", "id", new Date(), "neve", 20, 30, "no", "megjegyzes", 40, "id");
     this.tableService.getAll().subscribe(gyufacimkek => {
       this.gyufacimkeData = gyufacimkek.map(gyufacimke => {
-        const values = Object.values(gyufacimke);
-        return [...values];
+        return gyufacimke;
       });
-
-
-    })
+    });
   }
 }

@@ -12,7 +12,7 @@ export class TableService {
   orszagokCollection = collection(this.firestore, 'orszagok');
   gyufacimkeCollection = collection(this.firestore, 'gyufacimke');
 
-  getAll(): Observable<Gyufacimke[]>{
+  getAll(): Observable<Gyufacimke[]> {
     return collectionData(this.gyufacimkeCollection,
       {idField: 'id'
       }).pipe(
@@ -20,9 +20,10 @@ export class TableService {
     ) as Observable<Gyufacimke[]>;
   }
 
-  addGyufacimke(gyufacimke: Gyufacimke):Observable<void>{
+  addGyufacimke(gyufacimke: Gyufacimke): Observable<void> {
     const newGyufacimke = gyufacimke.toPlainObject();
-    const promise = addDoc(this.gyufacimkeCollection, newGyufacimke).then(() => {});
+    const promise = addDoc(this.gyufacimkeCollection, newGyufacimke).then(() => {
+    });
     return from(promise);
   }
 }
