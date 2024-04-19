@@ -43,7 +43,14 @@ export class TableComponent implements OnInit {
       columns: [],
       indicators: false
     },
+    /*columnSorting: {
+      initialConfig: {
+        column: 0,
+        sortOrder: "desc"
+      }
+    },*/
     beforeRemoveRow: this.deleteTableData.bind(this),
+    beforeCreateRow: this.addTableRow.bind(this),
   };
   gyufacimkeInputData: Gyufacimke[];
   cimkeTipusok: CimkeTipus[];
@@ -93,6 +100,15 @@ export class TableComponent implements OnInit {
     this.tableService.saveGyufacimke(gyufacimkeOutputObjects).subscribe({
       complete: () => console.log('Sikeres mentés'),
       error: err => console.error('Hiba történt', err)
+    });
+  }
+
+  addTableRow(index: number, amount: number, source?: any) {
+    let previousGyufacimke = this.gyufacimkeInputData[index];
+    let gyufacimke = new Gyufacimke(this.gyufacimkeInputData.length+1, this.gyufacimkeInputData.length+100001, 0, previousGyufacimke.nyilv_vetel_datum, previousGyufacimke.tipus, 0, 0, '', '', previousGyufacimke.orszag, '', previousGyufacimke.ev, '', previousGyufacimke.nyilvantartas, previousGyufacimke.beszerzesi_datum, previousGyufacimke.elado_neve, 0, 0, '', '', 0, '');
+    this.tableService.addGyufacimke(gyufacimke).subscribe({
+      complete: () => console.log('Insertion successful'),
+      error: err => console.error('An error occurred', err)
     });
   }
 

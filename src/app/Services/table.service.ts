@@ -50,6 +50,12 @@ export class TableService {
       }) as Observable<Orszag[]>;
   }
 
+  addGyufacimke(gyufacimke: Gyufacimke): Observable<void> {
+    const newGyufacimke = gyufacimke.toPlainObject();
+    delete newGyufacimke.id;
+    return from(addDoc(this.gyufacimkeCollection, newGyufacimke)).pipe(map(() => {}));
+  }
+
   saveGyufacimke(gyufacimkek: Gyufacimke[]): Observable<void>{
     const observables = gyufacimkek.map(gyufacimke => {
       const newGyufacimke = gyufacimke.toPlainObject();
