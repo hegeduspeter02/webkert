@@ -1,4 +1,5 @@
 export class Gyufacimke {
+  private _id: string|undefined;
   private _sorszam: number;
   private _digitalizalasi_azon: number;
   private _adatb_azon: number;
@@ -22,7 +23,8 @@ export class Gyufacimke {
   private _becsult_ertek: number;
   private _eladas_csere_id: string;
 
-  constructor(sorszam: number, digitalizalasi_azon: number, adatb_azon: number, nyilv_vetel_datum: string, tipus: string, meret_x: number, meret_y: number, megnevezes: string, kulcsszavak: string, orszag: string, helyseg: string, ev: number, cimke_megjegyzes: string, nyilvantartas: string, beszerzesi_datum: string, elado_neve: string, bekerulesi_ertek: number, jarulekos_koltseg: number, tarolasi_infomacio: string, vetel_megjegyzes: string, becsult_ertek: number, eladas_csere_id: string) {
+  constructor(sorszam: number, digitalizalasi_azon: number, adatb_azon: number, nyilv_vetel_datum: string, tipus: string, meret_x: number, meret_y: number, megnevezes: string, kulcsszavak: string, orszag: string, helyseg: string, ev: number, cimke_megjegyzes: string, nyilvantartas: string, beszerzesi_datum: string, elado_neve: string, bekerulesi_ertek: number, jarulekos_koltseg: number, tarolasi_infomacio: string, vetel_megjegyzes: string, becsult_ertek: number, eladas_csere_id: string, id?: string) {
+    this._id = id;
     this._sorszam = sorszam;
     this._digitalizalasi_azon = digitalizalasi_azon;
     this._adatb_azon = adatb_azon;
@@ -49,6 +51,7 @@ export class Gyufacimke {
 
   toPlainObject() {
     return {
+      id: this._id,
       sorszam: this._sorszam,
       digitalizalasi_azon: this._digitalizalasi_azon,
       adatb_azon: this._adatb_azon,
@@ -74,6 +77,14 @@ export class Gyufacimke {
     }
   }
 
+  get id(): string | undefined {
+    return this._id;
+  }
+
+  set id(value: string | undefined) {
+    this._id = value;
+  }
+
   get sorszam(): number {
     return this._sorszam;
   }
@@ -97,6 +108,7 @@ export class Gyufacimke {
   set adatb_azon(value: number) {
     this._adatb_azon = value;
   }
+
   get nyilv_vetel_datum(): string {
     return this._nyilv_vetel_datum;
   }
@@ -184,6 +196,7 @@ export class Gyufacimke {
   set nyilvantartas(value: string) {
     this._nyilvantartas = value;
   }
+
   get beszerzesi_datum(): string {
     return this._beszerzesi_datum;
   }

@@ -40,21 +40,58 @@ export class TableComponent implements OnInit {
     contextMenu: true,
     filters: true,
     dropdownMenu: true,
+    hiddenColumns: {
+      columns: [],
+      indicators: false
+    },
   };
-  gyufacimkeData: Gyufacimke[];
+  gyufacimkeInputData: Gyufacimke[];
   cimkeTipusok: CimkeTipus[];
   nyilvantartasok: Nyilvantartas[];
   orszagok: Orszag[];
+  gyufacimkeOutputData: any[];
 
   constructor() {
-    this.gyufacimkeData = [];
+    this.gyufacimkeInputData = [];
     this.cimkeTipusok = [];
     this.nyilvantartasok = [];
     this.orszagok = [];
+    this.gyufacimkeOutputData = [];
   }
 
   getTableData(){
-    console.log(this.hotRegisterer.getInstance(this.tableId).getData());
+    this.gyufacimkeOutputData = this.hotRegisterer.getInstance(this.tableId).getData();
+
+    let gyufacimkeOutputObjects = this.gyufacimkeOutputData.map(gyufacimke => {
+      return new Gyufacimke(
+        gyufacimke[0],
+        gyufacimke[1],
+        gyufacimke[2],
+        gyufacimke[3],
+        gyufacimke[4],
+        gyufacimke[5],
+        gyufacimke[6],
+        gyufacimke[7],
+        gyufacimke[8],
+        gyufacimke[9],
+        gyufacimke[10],
+        gyufacimke[11],
+        gyufacimke[12],
+        gyufacimke[13],
+        gyufacimke[14],
+        gyufacimke[15],
+        gyufacimke[16],
+        gyufacimke[17],
+        gyufacimke[18],
+        gyufacimke[19],
+        gyufacimke[20],
+        gyufacimke[21],
+        gyufacimke[22]
+      )
+    });
+
+    this.tableService.saveGyufacimke(gyufacimkeOutputObjects);
+    console.log(gyufacimkeOutputObjects);
   }
 
   addData() {
@@ -102,7 +139,7 @@ export class TableComponent implements OnInit {
 
   getGyufacimke() {
     this.tableService.getAllGyufacimke().subscribe(gyufacimkek => {
-      this.gyufacimkeData = gyufacimkek.map(gyufacimke => {
+      this.gyufacimkeInputData = gyufacimkek.map(gyufacimke => {
         this.cimkeTipusok.forEach(cimkeTipus => {
           if(gyufacimke.tipus === `cimke_tipusok/${cimkeTipus.rovidites}`) {
             gyufacimke.tipus = cimkeTipus.nev;
@@ -122,6 +159,7 @@ export class TableComponent implements OnInit {
         });
         return gyufacimke;
       });
+      console.log(this.gyufacimkeInputData);
     });
   }
 }

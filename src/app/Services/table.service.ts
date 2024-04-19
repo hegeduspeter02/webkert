@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
-import {Firestore, collection, collectionData, addDoc} from "@angular/fire/firestore";
+import {Firestore, collection, collectionData, addDoc, doc, getDoc, updateDoc, setDoc} from "@angular/fire/firestore";
 import {Gyufacimke} from "../Entities/Gyufacimke";
-import {from, map, Observable} from "rxjs";
+import {forkJoin, from, map, Observable} from "rxjs";
 import {Orszag} from "../Entities/Orszag";
 import {CimkeTipus} from "../Entities/CimkeTipus";
 import {Nyilvantartas} from "../Entities/Nyilvantartas";
@@ -38,6 +38,24 @@ export class TableService {
     return collectionData(this.orszagokCollection,
       {idField: 'id'
       }) as Observable<Orszag[]>;
+  }
+
+  saveGyufacimke(gyufacimkek: Gyufacimke[]): Observable<void>{
+    const observables = gyufacimkek.map(gyufacimke => {
+      const newGyufacimke = gyufacimke.toPlainObject();
+      const docRef = doc(this.firestore, 'gyufacimkek', String(newGyufacimke.id));
+      return from(getDoc(docRef).then(docSnapshot => {
+        if (docSnapshot.exists()) {
+          // Document exists, update it
+          return updateDoc(docRef, newGyufacimke);
+        } else {
+          // Document does not exist, add it
+          return setDoc(docRef, newGyufacimke);
+        }
+      }));
+    });
+
+    return forkJoin(observables).pipe(map(() => {}));
   }
 
   addGyufacimke(gyufacimke: Gyufacimke): Observable<void> {
