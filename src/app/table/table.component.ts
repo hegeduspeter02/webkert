@@ -3,11 +3,10 @@ import Handsontable from "handsontable";
 import {registerAllModules} from "handsontable/registry";
 import {TableService} from "../Services/table.service";
 import {Gyufacimke} from "../Entities/Gyufacimke";
-import {HotTableModule} from "@handsontable/angular";
+import {HotTableModule, HotTableRegisterer} from "@handsontable/angular";
 import {CimkeTipus} from "../Entities/CimkeTipus";
 import {Nyilvantartas} from "../Entities/Nyilvantartas";
 import {Orszag} from "../Entities/Orszag";
-import {HotTableRegisterer} from "@handsontable/angular";
 
 // register Handsontable's modules
 registerAllModules();
@@ -44,6 +43,7 @@ export class TableComponent implements OnInit {
       columns: [],
       indicators: false
     },
+    beforeRemoveRow: this.deleteTableData.bind(this),
   };
   gyufacimkeInputData: Gyufacimke[];
   cimkeTipusok: CimkeTipus[];
@@ -63,7 +63,7 @@ export class TableComponent implements OnInit {
     this.gyufacimkeOutputData = this.hotRegisterer.getInstance(this.tableId).getData();
 
     let gyufacimkeOutputObjects = this.gyufacimkeOutputData.map(gyufacimke => {
-      let gyufacimkeObject = new Gyufacimke(
+      return new Gyufacimke(
         gyufacimke[0],
         gyufacimke[1],
         gyufacimke[2],
@@ -87,36 +87,23 @@ export class TableComponent implements OnInit {
         gyufacimke[20],
         gyufacimke[21],
         gyufacimke[22]
-      )
-
-      if (gyufacimkeObject.tipus === 'Palást') {
-        gyufacimkeObject.tipus = `cimke_tipusok/${this.cimkeTipusok.find(cimkeTipus => cimkeTipus.nev === 'Palást')?.rovidites}`;
-      }
-      else if(gyufacimkeObject.tipus === 'Normál') {
-        gyufacimkeObject.tipus = `cimke_tipusok/${this.cimkeTipusok.find(cimkeTipus => cimkeTipus.nev === 'Normál')?.rovidites}`;
-      }
-      else if(gyufacimkeObject.tipus === 'Csomag') {
-        gyufacimkeObject.tipus = `cimke_tipusok/${this.cimkeTipusok.find(cimkeTipus => cimkeTipus.nev === 'Csomag')?.rovidites}`;
-      }
-      else{
-        gyufacimkeObject.tipus = `cimke_tipusok/${this.cimkeTipusok.find(cimkeTipus => cimkeTipus.nev === 'Egyéb')?.rovidites}`;
-      }
-
-      return gyufacimkeObject;
+      );
     });
 
     this.tableService.saveGyufacimke(gyufacimkeOutputObjects).subscribe({
       complete: () => console.log('Sikeres mentés'),
       error: err => console.error('Hiba történt', err)
     });
-    console.log(gyufacimkeOutputObjects);
   }
 
-  addData() {
-    let gyufacimke = new Gyufacimke(1, 10, 20, "2024.04.17", "cimke_tipusok/P", 10, 10, "nev", "jo, rossz", "orszagok/A", "10", 2010, "comment", "nyilvantartasok/GY", "2024.04.17", "neve", 20, 30, "no", "megjegyzes", 40, "id");
-    this.tableService.addGyufacimke(gyufacimke).subscribe({
-      complete: () => console.log('Sikeres mentés'),
-      error: err => console.error('Hiba történt', err)
+  deleteTableData(index: number, amount: number, physicalRows: number[], source?: any) {
+    let gyufacimkesToDelete = physicalRows.map(row => {
+      return this.gyufacimkeInputData[row];
+    });
+
+    this.tableService.deleteGyufacimke(gyufacimkesToDelete).subscribe({
+      complete: () => console.log('Deletion successful'),
+      error: err => console.error('An error occurred', err)
     });
   }
 
@@ -158,23 +145,6 @@ export class TableComponent implements OnInit {
   getGyufacimke() {
     this.tableService.getAllGyufacimke().subscribe(gyufacimkek => {
       this.gyufacimkeInputData = gyufacimkek.map(gyufacimke => {
-        this.cimkeTipusok.forEach(cimkeTipus => {
-          if(gyufacimke.tipus === `cimke_tipusok/${cimkeTipus.rovidites}`) {
-            gyufacimke.tipus = cimkeTipus.nev;
-          }
-        });
-
-        this.nyilvantartasok.forEach(nyilvantartas => {
-          if(gyufacimke.nyilvantartas === `nyilvantartasok/${nyilvantartas.rovidites}`) {
-            gyufacimke.nyilvantartas = nyilvantartas.nev;
-          }
-        });
-
-        this.orszagok.forEach(orszag => {
-          if(gyufacimke.orszag === `orszagok/${orszag.rovidites}`) {
-            gyufacimke.orszag = orszag.nev;
-          }
-        });
         return gyufacimke;
       });
       console.log(this.gyufacimkeInputData);

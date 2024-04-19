@@ -1,6 +1,5 @@
 <script src="../Entities/Gyufacimke.ts"></script>
-<button (click)="addData()">Add Data</button>
-<button (click)="getTableData()">Get Data</button>
+<button (click)="getTableData()">Save Data</button>
 <hot-table
   [settings]="hotSettings"
   [data]="gyufacimkeInputData"
@@ -21,11 +20,11 @@
   <hot-column data="nyilvantartas" title="Nyilvántartás" type="dropdown" [source]="getNyilvantartasNevek()"></hot-column>
   <hot-column data="beszerzesi_datum" title="Beszerzési dátum" type="date" dateFormat="YYYY.MM.DD"></hot-column>
   <hot-column data="elado_neve" title="Eladó/Partner neve"></hot-column>
-  <hot-column data="bekerulesi_ertek" type="numeric" title="Bekerülési érték"></hot-column>
-  <hot-column data="jarulekos_koltseg" type="numeric" title="Járulékos költség"></hot-column>
+  <hot-column data="bekerulesi_ertek" type="numeric" [numericFormat]="{pattern: '0,0', culture:'hu-HU'}"  title="Bekerülési érték"></hot-column>
+  <hot-column data="jarulekos_koltseg" type="numeric" [numericFormat]="{pattern: '0,0', culture:'hu-HU'}" title="Járulékos költség"></hot-column>
   <hot-column data="tarolasi_infomacio" title="Tárolási információ"></hot-column>
   <hot-column data="vetel_megjegyzes" title="Vétel megjegyzés"></hot-column>
-  <hot-column data="becsult_ertek" type="numeric" title="Becsült érték"></hot-column>
+  <hot-column data="becsult_ertek" type="numeric" [numericFormat]="{pattern: '0,0', culture:'hu-HU'}" title="Becsült érték"></hot-column>
   <hot-column data="eladas_csere_id" title="Eladás/Csere"></hot-column>
   <hot-column data="id" type="numeric" title="Id"></hot-column>
 </hot-table>
