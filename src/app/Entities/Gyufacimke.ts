@@ -7,7 +7,7 @@ export class Gyufacimke {
   private _meret_x: number;
   private _meret_y: number;
   private _megnevezes: string;
-  private _kulcsszavak: string[];
+  private _kulcsszavak: string;
   private _orszag: string;
   private _helyseg: string;
   private _ev: number;
@@ -22,7 +22,7 @@ export class Gyufacimke {
   private _becsult_ertek: number;
   private _eladas_csere_id: string;
 
-  constructor(sorszam: number, digitalizalasi_azon: number, adatb_azon: number, nyilv_vetel_datum: string, tipus: string, meret_x: number, meret_y: number, megnevezes: string, kulcsszavak: string[], orszag: string, helyseg: string, ev: number, cimke_megjegyzes: string, nyilvantartas: string, beszerzesi_datum: string, elado_neve: string, bekerulesi_ertek: number, jarulekos_koltseg: number, tarolasi_infomacio: string, vetel_megjegyzes: string, becsult_ertek: number, eladas_csere_id: string) {
+  constructor(sorszam: number, digitalizalasi_azon: number, adatb_azon: number, nyilv_vetel_datum: string, tipus: string, meret_x: number, meret_y: number, megnevezes: string, kulcsszavak: string, orszag: string, helyseg: string, ev: number, cimke_megjegyzes: string, nyilvantartas: string, beszerzesi_datum: string, elado_neve: string, bekerulesi_ertek: number, jarulekos_koltseg: number, tarolasi_infomacio: string, vetel_megjegyzes: string, becsult_ertek: number, eladas_csere_id: string) {
     this._sorszam = sorszam;
     this._digitalizalasi_azon = digitalizalasi_azon;
     this._adatb_azon = adatb_azon;
@@ -137,11 +137,11 @@ export class Gyufacimke {
     this._megnevezes = value;
   }
 
-  get kulcsszavak(): string[] {
+  get kulcsszavak(): string {
     return this._kulcsszavak;
   }
 
-  set kulcsszavak(value: string[]) {
+  set kulcsszavak(value: string) {
     this._kulcsszavak = value;
   }
 

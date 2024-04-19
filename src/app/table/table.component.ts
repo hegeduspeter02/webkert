@@ -4,10 +4,10 @@ import {registerAllModules} from "handsontable/registry";
 import {TableService} from "../Services/table.service";
 import {Gyufacimke} from "../Entities/Gyufacimke";
 import {HotTableModule} from "@handsontable/angular";
-import {DatePipe} from "@angular/common";
 import {CimkeTipus} from "../Entities/CimkeTipus";
 import {Nyilvantartas} from "../Entities/Nyilvantartas";
 import {Orszag} from "../Entities/Orszag";
+import {HotTableRegisterer} from "@handsontable/angular";
 
 // register Handsontable's modules
 registerAllModules();
@@ -21,6 +21,8 @@ registerAllModules();
 })
 export class TableComponent implements OnInit {
   tableService = inject(TableService);
+  private hotRegisterer = new HotTableRegisterer();
+  tableId = 'hotInstance';
 
   ngOnInit(): void {
     this.getCimkeTipusok();
@@ -51,8 +53,12 @@ export class TableComponent implements OnInit {
     this.orszagok = [];
   }
 
+  getTableData(){
+    console.log(this.hotRegisterer.getInstance(this.tableId).getData());
+  }
+
   addData() {
-    let gyufacimke = new Gyufacimke(1, 10, 20, "2024.04.17", "cimke_tipusok/P", 10, 10, "nev", ["jo", "rossz"], "orszagok/A", "10", 2010, "comment", "nyilvantartasok/GY", "2024.04.17", "neve", 20, 30, "no", "megjegyzes", 40, "id");
+    let gyufacimke = new Gyufacimke(1, 10, 20, "2024.04.17", "cimke_tipusok/P", 10, 10, "nev", "jo, rossz", "orszagok/A", "10", 2010, "comment", "nyilvantartasok/GY", "2024.04.17", "neve", 20, 30, "no", "megjegyzes", 40, "id");
     this.tableService.addGyufacimke(gyufacimke).subscribe({
       complete: () => console.log('Sikeres mentés'),
       error: err => console.error('Hiba történt', err)
