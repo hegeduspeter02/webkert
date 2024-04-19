@@ -15,9 +15,7 @@ export class TableService {
   getAll(): Observable<Gyufacimke[]> {
     return collectionData(this.gyufacimkeCollection,
       {idField: 'id'
-      }).pipe(
-      map(docs => docs.map(Gyufacimke.fromFirestore))
-    ) as Observable<Gyufacimke[]>;
+      }) as Observable<Gyufacimke[]>;
   }
 
   addGyufacimke(gyufacimke: Gyufacimke): Observable<void> {

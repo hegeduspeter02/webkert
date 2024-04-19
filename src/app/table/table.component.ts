@@ -32,15 +32,6 @@ export class TableComponent implements OnInit {
     contextMenu: true,
     filters: true,
     dropdownMenu: true,
-    columns: [
-      {
-        type: 'numeric',
-        numericFormat: {
-          pattern: '$0,0.00',
-        },
-        allowEmpty: false,
-      }
-    ]
   };
   gyufacimkeData: Gyufacimke[];
 
@@ -48,7 +39,8 @@ export class TableComponent implements OnInit {
     this.gyufacimkeData = [];
   }
 
-  addData(gyufacimke: Gyufacimke) {
+  addData() {
+    let gyufacimke = new Gyufacimke(1, 10, 20, "2024.04.17", '20', 10, 10, "nev", ["jo", "rossz"], "10", "10", 2010, "comment", "id", "2024.04.17", "neve", 20, 30, "no", "megjegyzes", 40, "id");
     this.tableService.addGyufacimke(gyufacimke).subscribe({
       complete: () => console.log('Sikeres mentés'),
       error: err => console.error('Hiba történt', err)
@@ -56,7 +48,7 @@ export class TableComponent implements OnInit {
   }
 
   getData() {
-    // let gyufacimke = new Gyufacimke(1, 10, 20, new Date(), '20', 10, 10, "nev", ["jo", "rossz"], "10", "10", 2010, "comment", "id", new Date(), "neve", 20, 30, "no", "megjegyzes", 40, "id");
+
     this.tableService.getAll().subscribe(gyufacimkek => {
       this.gyufacimkeData = gyufacimkek.map(gyufacimke => {
         return gyufacimke;

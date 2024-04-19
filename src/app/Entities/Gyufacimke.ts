@@ -2,7 +2,7 @@ export class Gyufacimke {
   private _sorszam: number;
   private _digitalizalasi_azon: number;
   private _adatb_azon: number;
-  private _nyilv_vetel_datum: Date;
+  private _nyilv_vetel_datum: string;
   private _tipus_id: string;
   private _meret_x: number;
   private _meret_y: number;
@@ -13,7 +13,7 @@ export class Gyufacimke {
   private _ev: number;
   private _cimke_megjegyzes: string;
   private _nyilvantartas_id: string;
-  private _beszerzesi_datum: Date;
+  private _beszerzesi_datum: string;
   private _elado_neve: string;
   private _bekerulesi_ertek: number;
   private _jarulekos_koltseg: number;
@@ -22,7 +22,7 @@ export class Gyufacimke {
   private _becsult_ertek: number;
   private _eladas_csere_id: string;
 
-  constructor(sorszam: number, digitalizalasi_azon: number, adatb_azon: number, nyilv_vetel_datum: Date, tipus_id: string, meret_x: number, meret_y: number, megnevezes: string, kulcsszavak: string[], orszag_id: string, helyseg_id: string, ev: number, cimke_megjegyzes: string, nyilvantartas_id: string, beszerzesi_datum: Date, elado_neve: string, bekerulesi_ertek: number, jarulekos_koltseg: number, tarolasi_infomacio: string, vetel_megjegyzes: string, becsult_ertek: number, eladas_csere_id: string) {
+  constructor(sorszam: number, digitalizalasi_azon: number, adatb_azon: number, nyilv_vetel_datum: string, tipus_id: string, meret_x: number, meret_y: number, megnevezes: string, kulcsszavak: string[], orszag_id: string, helyseg_id: string, ev: number, cimke_megjegyzes: string, nyilvantartas_id: string, beszerzesi_datum: string, elado_neve: string, bekerulesi_ertek: number, jarulekos_koltseg: number, tarolasi_infomacio: string, vetel_megjegyzes: string, becsult_ertek: number, eladas_csere_id: string) {
     this._sorszam = sorszam;
     this._digitalizalasi_azon = digitalizalasi_azon;
     this._adatb_azon = adatb_azon;
@@ -74,33 +74,6 @@ export class Gyufacimke {
     }
   }
 
-  static fromFirestore(doc: any): Gyufacimke {
-    return new Gyufacimke(
-      doc.sorszam,
-      doc.digitalizalasi_azon,
-      doc.adatb_azon,
-      doc.nyilv_vetel_datum.toDate(),
-      doc.tipus_id,
-      doc.meret_x,
-      doc.meret_y,
-      doc.megnevezes,
-      doc.kulcsszavak,
-      doc.orszag_id,
-      doc.helyseg_id,
-      doc.ev,
-      doc.cimke_megjegyzes,
-      doc.nyilvantartas_id,
-      doc.beszerzesi_datum.toDate(),
-      doc.elado_neve,
-      doc.bekerulesi_ertek,
-      doc.jarulekos_koltseg,
-      doc.tarolasi_infomacio,
-      doc.vetel_megjegyzes,
-      doc.becsult_ertek,
-      doc.eladas_csere_id
-    );
-  }
-
   get sorszam(): number {
     return this._sorszam;
   }
@@ -124,12 +97,11 @@ export class Gyufacimke {
   set adatb_azon(value: number) {
     this._adatb_azon = value;
   }
-
-  get nyilv_vetel_datum(): Date {
+  get nyilv_vetel_datum(): string {
     return this._nyilv_vetel_datum;
   }
 
-  set nyilv_vetel_datum(value: Date) {
+  set nyilv_vetel_datum(value: string) {
     this._nyilv_vetel_datum = value;
   }
 
@@ -212,12 +184,11 @@ export class Gyufacimke {
   set nyilvantartas_id(value: string) {
     this._nyilvantartas_id = value;
   }
-
-  get beszerzesi_datum(): Date {
+  get beszerzesi_datum(): string {
     return this._beszerzesi_datum;
   }
 
-  set beszerzesi_datum(value: Date) {
+  set beszerzesi_datum(value: string) {
     this._beszerzesi_datum = value;
   }
 

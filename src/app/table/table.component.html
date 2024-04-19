@@ -1,28 +1,28 @@
 <script src="../Entities/Gyufacimke.ts"></script>
-<button (click)="getData()">Get Data</button>
+<button (click)="addData()">Add Data</button>
 <hot-table
   [settings]="hotSettings"
   [data]="gyufacimkeData">
-  <hot-column data="_sorszam" title="Sorszám"></hot-column>
-  <hot-column data="_digitalizalasi_azon" title="Digitális azonosító"></hot-column>
-  <hot-column data="_adatb_azon" title="Adatbázis azonosító"></hot-column>
-  <hot-column data="_nyilv_vetel_datum" title="Nyilvántartásba vétel dátum"></hot-column>
-  <hot-column data="_tipus_id" title="Típus"></hot-column>
-  <hot-column data="_meret_x" title="Méret x"></hot-column>
-  <hot-column data="_meret_y" title="Méret y"></hot-column>
-  <hot-column data="_megnevezes" title="Megnevezés"></hot-column>
-  <hot-column data="_kulcsszavak" title="Kulcsszavak"></hot-column>
-  <hot-column data="_orszag_id" title="Ország"></hot-column>
-  <hot-column data="_helyseg_id" title="Helység"></hot-column>
-  <hot-column data="_ev" title="Év"></hot-column>
-  <hot-column data="_cimke_megjegyzes" title="Megjegyzés"></hot-column>
-  <hot-column data="_nyilvantartas_id" title="Nyilvántartás"></hot-column>
-  <hot-column data="_beszerzesi_datum" title="Beszerzési dátum"></hot-column>
-  <hot-column data="_elado_neve" title="Eladó/Partner neve"></hot-column>
-  <hot-column data="_bekerulesi_ertek" title="Bekerülési érték"></hot-column>
-  <hot-column data="_jarulekos_koltseg" title="Járulékos költség"></hot-column>
-  <hot-column data="_tarolasi_infomacio" title="Tárolási információ"></hot-column>
-  <hot-column data="_vetel_megjegyzes" title="Vétel megjegyzés"></hot-column>
-  <hot-column data="_becsult_ertek" title="Becsült érték"></hot-column>
-  <hot-column data="_eladas_csere_id" title="Eladás/Csere"></hot-column>
+  <hot-column data="sorszam" title="Sorszám"></hot-column>
+  <hot-column data="digitalizalasi_azon" title="Digitális azonosító"></hot-column>
+  <hot-column data="adatb_azon" title="Adatbázis azonosító"></hot-column>
+  <hot-column data="nyilv_vetel_datum" title="Nyilvántartásba vétel dátum" type="date" dateFormat="YYYY.MM.DD"></hot-column>
+  <hot-column data="tipus_id" title="Típus"></hot-column>
+  <hot-column data="meret_x" title="Méret x"></hot-column>
+  <hot-column data="meret_y" title="Méret y"></hot-column>
+  <hot-column data="megnevezes" title="Megnevezés"></hot-column>
+  <hot-column data="kulcsszavak" title="Kulcsszavak"></hot-column>
+  <hot-column data="orszag_id" title="Ország"></hot-column>
+  <hot-column data="helyseg_id" title="Helység"></hot-column>
+  <hot-column data="ev" title="Év"></hot-column>
+  <hot-column data="cimke_megjegyzes" title="Megjegyzés"></hot-column>
+  <hot-column data="nyilvantartas_id" title="Nyilvántartás"></hot-column>
+  <hot-column data="beszerzesi_datum" title="Beszerzési dátum" type="date" dateFormat="YYYY.MM.DD"></hot-column>
+  <hot-column data="elado_neve" title="Eladó/Partner neve"></hot-column>
+  <hot-column data="bekerulesi_ertek" title="Bekerülési érték"></hot-column>
+  <hot-column data="jarulekos_koltseg" title="Járulékos költség"></hot-column>
+  <hot-column data="tarolasi_infomacio" title="Tárolási információ"></hot-column>
+  <hot-column data="vetel_megjegyzes" title="Vétel megjegyzés"></hot-column>
+  <hot-column data="becsult_ertek" title="Becsült érték"></hot-column>
+  <hot-column data="eladas_csere_id" title="Eladás/Csere"></hot-column>
 </hot-table>
