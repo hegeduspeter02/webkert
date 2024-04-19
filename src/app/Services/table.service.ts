@@ -12,7 +12,7 @@ import {Nyilvantartas} from "../Entities/Nyilvantartas";
 export class TableService {
   firestore = inject(Firestore);
   orszagokCollection = collection(this.firestore, 'orszagok');
-  gyufacimkeCollection = collection(this.firestore, 'gyufacimke');
+  gyufacimkeCollection = collection(this.firestore, 'gyufacimkek');
   cimkeTipusCollection = collection(this.firestore, 'cimke_tipusok');
   nyilvantartasCollection = collection(this.firestore, 'nyilvantartasok');
 
@@ -43,16 +43,14 @@ export class TableService {
   saveGyufacimke(gyufacimkek: Gyufacimke[]): Observable<void>{
     const observables = gyufacimkek.map(gyufacimke => {
       const newGyufacimke = gyufacimke.toPlainObject();
-      const docRef = doc(this.firestore, 'gyufacimkek', String(newGyufacimke.id));
-      return from(getDoc(docRef).then(docSnapshot => {
-        if (docSnapshot.exists()) {
-          // Document exists, update it
-          return updateDoc(docRef, newGyufacimke);
-        } else {
-          // Document does not exist, add it
-          return setDoc(docRef, newGyufacimke);
-        }
-      }));
+      if (newGyufacimke.id) {
+        // If id exists, update the document
+        const docRef = doc(this.firestore, 'gyufacimkek', String(newGyufacimke.id));
+        return from(updateDoc(docRef, newGyufacimke));
+      } else {
+        // If id does not exist, add a new document with auto-generated id
+        return from(addDoc(this.gyufacimkeCollection, newGyufacimke));
+      }
     });
 
     return forkJoin(observables).pipe(map(() => {}));

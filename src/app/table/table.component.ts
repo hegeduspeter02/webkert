@@ -90,7 +90,10 @@ export class TableComponent implements OnInit {
       )
     });
 
-    this.tableService.saveGyufacimke(gyufacimkeOutputObjects);
+    this.tableService.saveGyufacimke(gyufacimkeOutputObjects).subscribe({
+      complete: () => console.log('Sikeres mentés'),
+      error: err => console.error('Hiba történt', err)
+    });
     console.log(gyufacimkeOutputObjects);
   }
 
