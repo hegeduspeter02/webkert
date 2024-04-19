@@ -8,11 +8,11 @@ export class Gyufacimke {
   private _meret_y: number;
   private _megnevezes: string;
   private _kulcsszavak: string[];
-  private _orszag_id: string;
-  private _helyseg_id: string;
+  private _orszag: string;
+  private _helyseg: string;
   private _ev: number;
   private _cimke_megjegyzes: string;
-  private _nyilvantartas_id: string;
+  private _nyilvantartas: string;
   private _beszerzesi_datum: string;
   private _elado_neve: string;
   private _bekerulesi_ertek: number;
@@ -22,7 +22,7 @@ export class Gyufacimke {
   private _becsult_ertek: number;
   private _eladas_csere_id: string;
 
-  constructor(sorszam: number, digitalizalasi_azon: number, adatb_azon: number, nyilv_vetel_datum: string, tipus: string, meret_x: number, meret_y: number, megnevezes: string, kulcsszavak: string[], orszag_id: string, helyseg_id: string, ev: number, cimke_megjegyzes: string, nyilvantartas_id: string, beszerzesi_datum: string, elado_neve: string, bekerulesi_ertek: number, jarulekos_koltseg: number, tarolasi_infomacio: string, vetel_megjegyzes: string, becsult_ertek: number, eladas_csere_id: string) {
+  constructor(sorszam: number, digitalizalasi_azon: number, adatb_azon: number, nyilv_vetel_datum: string, tipus: string, meret_x: number, meret_y: number, megnevezes: string, kulcsszavak: string[], orszag: string, helyseg: string, ev: number, cimke_megjegyzes: string, nyilvantartas: string, beszerzesi_datum: string, elado_neve: string, bekerulesi_ertek: number, jarulekos_koltseg: number, tarolasi_infomacio: string, vetel_megjegyzes: string, becsult_ertek: number, eladas_csere_id: string) {
     this._sorszam = sorszam;
     this._digitalizalasi_azon = digitalizalasi_azon;
     this._adatb_azon = adatb_azon;
@@ -32,11 +32,11 @@ export class Gyufacimke {
     this._meret_y = meret_y;
     this._megnevezes = megnevezes;
     this._kulcsszavak = kulcsszavak;
-    this._orszag_id = orszag_id;
-    this._helyseg_id = helyseg_id;
+    this._orszag = orszag;
+    this._helyseg = helyseg;
     this._ev = ev;
     this._cimke_megjegyzes = cimke_megjegyzes;
-    this._nyilvantartas_id = nyilvantartas_id;
+    this._nyilvantartas = nyilvantartas;
     this._beszerzesi_datum = beszerzesi_datum;
     this._elado_neve = elado_neve;
     this._bekerulesi_ertek = bekerulesi_ertek;
@@ -58,11 +58,11 @@ export class Gyufacimke {
       meret_y: this._meret_y,
       megnevezes: this._megnevezes,
       kulcsszavak: this._kulcsszavak,
-      orszag_id: this._orszag_id,
-      helyseg_id: this._helyseg_id,
+      orszag: this._orszag,
+      helyseg: this._helyseg,
       ev: this._ev,
       cimke_megjegyzes: this._cimke_megjegyzes,
-      nyilvantartas_id: this._nyilvantartas_id,
+      nyilvantartas: this._nyilvantartas,
       beszerzesi_datum: this._beszerzesi_datum,
       elado_neve: this._elado_neve,
       bekerulesi_ertek: this._bekerulesi_ertek,
@@ -145,20 +145,20 @@ export class Gyufacimke {
     this._kulcsszavak = value;
   }
 
-  get orszag_id(): string {
-    return this._orszag_id;
+  get orszag(): string {
+    return this._orszag;
   }
 
-  set orszag_id(value: string) {
-    this._orszag_id = value;
+  set orszag(value: string) {
+    this._orszag = value;
   }
 
-  get helyseg_id(): string {
-    return this._helyseg_id;
+  get helyseg(): string {
+    return this._helyseg;
   }
 
-  set helyseg_id(value: string) {
-    this._helyseg_id = value;
+  set helyseg(value: string) {
+    this._helyseg = value;
   }
 
   get ev(): number {
@@ -177,12 +177,12 @@ export class Gyufacimke {
     this._cimke_megjegyzes = value;
   }
 
-  get nyilvantartas_id(): string {
-    return this._nyilvantartas_id;
+  get nyilvantartas(): string {
+    return this._nyilvantartas;
   }
 
-  set nyilvantartas_id(value: string) {
-    this._nyilvantartas_id = value;
+  set nyilvantartas(value: string) {
+    this._nyilvantartas = value;
   }
   get beszerzesi_datum(): string {
     return this._beszerzesi_datum;
