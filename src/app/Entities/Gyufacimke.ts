@@ -3,7 +3,7 @@ export class Gyufacimke {
   private _digitalizalasi_azon: number;
   private _adatb_azon: number;
   private _nyilv_vetel_datum: string;
-  private _tipus_id: string;
+  private _tipus: string;
   private _meret_x: number;
   private _meret_y: number;
   private _megnevezes: string;
@@ -22,12 +22,12 @@ export class Gyufacimke {
   private _becsult_ertek: number;
   private _eladas_csere_id: string;
 
-  constructor(sorszam: number, digitalizalasi_azon: number, adatb_azon: number, nyilv_vetel_datum: string, tipus_id: string, meret_x: number, meret_y: number, megnevezes: string, kulcsszavak: string[], orszag_id: string, helyseg_id: string, ev: number, cimke_megjegyzes: string, nyilvantartas_id: string, beszerzesi_datum: string, elado_neve: string, bekerulesi_ertek: number, jarulekos_koltseg: number, tarolasi_infomacio: string, vetel_megjegyzes: string, becsult_ertek: number, eladas_csere_id: string) {
+  constructor(sorszam: number, digitalizalasi_azon: number, adatb_azon: number, nyilv_vetel_datum: string, tipus: string, meret_x: number, meret_y: number, megnevezes: string, kulcsszavak: string[], orszag_id: string, helyseg_id: string, ev: number, cimke_megjegyzes: string, nyilvantartas_id: string, beszerzesi_datum: string, elado_neve: string, bekerulesi_ertek: number, jarulekos_koltseg: number, tarolasi_infomacio: string, vetel_megjegyzes: string, becsult_ertek: number, eladas_csere_id: string) {
     this._sorszam = sorszam;
     this._digitalizalasi_azon = digitalizalasi_azon;
     this._adatb_azon = adatb_azon;
     this._nyilv_vetel_datum = nyilv_vetel_datum;
-    this._tipus_id = tipus_id;
+    this._tipus = tipus;
     this._meret_x = meret_x;
     this._meret_y = meret_y;
     this._megnevezes = megnevezes;
@@ -53,7 +53,7 @@ export class Gyufacimke {
       digitalizalasi_azon: this._digitalizalasi_azon,
       adatb_azon: this._adatb_azon,
       nyilv_vetel_datum: this._nyilv_vetel_datum,
-      tipus_id: this._tipus_id,
+      tipus: this._tipus,
       meret_x: this._meret_x,
       meret_y: this._meret_y,
       megnevezes: this._megnevezes,
@@ -105,12 +105,12 @@ export class Gyufacimke {
     this._nyilv_vetel_datum = value;
   }
 
-  get tipus_id(): string {
-    return this._tipus_id;
+  get tipus(): string {
+    return this._tipus;
   }
 
-  set tipus_id(value: string) {
-    this._tipus_id = value;
+  set tipus(value: string) {
+    this._tipus = value;
   }
 
   get meret_x(): number {
