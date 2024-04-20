@@ -39,18 +39,19 @@ export class TableComponent implements OnInit {
     licenseKey: 'non-commercial-and-evaluation',
     fixedColumnsStart: 4,
     autoWrapRow: true,
-    autoWrapCol: true,
+    autoWrapCol: false,
     contextMenu: true,
     filters: true,
     dropdownMenu: true,
     columnSorting: true,
     hiddenColumns: {
-      columns: [22],
+      columns: [23],
       indicators: false
     },
     beforeRemoveRow: this.deleteTableData.bind(this),
     beforeCreateRow: this.addTableRow.bind(this),
     afterChange: this.updateTableData.bind(this),
+    colWidths: [100, 150, 150, 150, 250, 75, 75, 75, 100, 100, 100, 100, 50, 100, 120, 130, 150, 120, 130, 150, 130, 120, 120]
   };
   gyufacimkeInputData: Gyufacimke[];
   cimkeTipusok: CimkeTipus[];
@@ -64,6 +65,7 @@ export class TableComponent implements OnInit {
     this.nyilvantartasok = [];
     this.orszagok = [];
     this.gyufacimkeOutputData = [];
+    this.imageRenderer.bind(this);
   }
 
   initializeTable() {
@@ -77,8 +79,7 @@ export class TableComponent implements OnInit {
 
   addTableRow(index: number, amount: number, source?: any) {
     let previousGyufacimke = this.gyufacimkeInputData[index];
-    let gyufacimke = new Gyufacimke(previousGyufacimke.sorszam + 1, previousGyufacimke.digitalizalasi_azon + 1, 0, previousGyufacimke.nyilv_vetel_datum, previousGyufacimke.tipus, 0, 0, '', '', previousGyufacimke.orszag, '', previousGyufacimke.ev, '', previousGyufacimke.nyilvantartas, previousGyufacimke.beszerzesi_datum, previousGyufacimke.elado_neve, 0, 0, '', '', 0, '');
-
+    let gyufacimke = new Gyufacimke(previousGyufacimke.sorszam + 1, Number(previousGyufacimke.digitalizalasi_azon) + 1, 0, previousGyufacimke.nyilv_vetel_datum, previousGyufacimke.tipus, 0, 0, '', '', previousGyufacimke.orszag, '', previousGyufacimke.ev, '', previousGyufacimke.nyilvantartas, previousGyufacimke.beszerzesi_datum, previousGyufacimke.elado_neve, 0, 0, '', '', 0, '');
     this.tableService.addGyufacimke(gyufacimke).subscribe({
       complete: () => console.log('Insertion successful'),
       error: err => console.error('An error occurred', err)
@@ -122,16 +123,9 @@ export class TableComponent implements OnInit {
     const args: [Core, HTMLTableCellElement, number, number, string | number, any, CellProperties] = [instance, TD, row, column, prop, value, cellProperties];
     Handsontable.renderers.TextRenderer.apply(this, args);
 
-    if(this.gyufacimkeInputData === undefined || this.gyufacimkeInputData.length === 0){
-      return;
-    }
+    let meret_x = instance.getDataAtCell(row, 6);
 
-    let digitalizalasi_azon = value;
-    let matchingGyufacimke = this.gyufacimkeInputData.find(gyufacimke => gyufacimke.digitalizalasi_azon === digitalizalasi_azon);
-
-
-    // point to assets/images
-    TD.innerHTML = '<img src="../../assets/images/'+ value +'.jpg" style="max-width:' + matchingGyufacimke?.meret_x +'px" alt="kep">';
+    TD.innerHTML = '<img src="../../assets/images/'+ value +'.jpg" style="max-width:'+ meret_x*2 +'px" alt="kep" disableOptimizedSrcset>';
   }
 
   getCimkeTipusok() {
@@ -178,4 +172,7 @@ export class TableComponent implements OnInit {
       console.log(this.gyufacimkeInputData);
     });
   }
+
+  protected readonly Number = Number;
+  protected readonly String = String;
 }
