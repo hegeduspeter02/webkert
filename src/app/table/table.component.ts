@@ -8,6 +8,7 @@ import {CimkeTipus} from "../Entities/CimkeTipus";
 import {Nyilvantartas} from "../Entities/Nyilvantartas";
 import {Orszag} from "../Entities/Orszag";
 import {NgIf} from "@angular/common";
+import {CellChange, ChangeSource} from "handsontable/common";
 
 // register Handsontable's modules
 registerAllModules();
@@ -47,6 +48,7 @@ export class TableComponent implements OnInit {
     },
     beforeRemoveRow: this.deleteTableData.bind(this),
     beforeCreateRow: this.addTableRow.bind(this),
+    afterChange: this.updateTableData.bind(this),
   };
   gyufacimkeInputData: Gyufacimke[];
   cimkeTipusok: CimkeTipus[];
@@ -62,43 +64,6 @@ export class TableComponent implements OnInit {
     this.gyufacimkeOutputData = [];
   }
 
-  getTableData(){
-    this.gyufacimkeOutputData = this.hotRegisterer.getInstance(this.tableId).getData();
-
-    let gyufacimkeOutputObjects = this.gyufacimkeOutputData.map(gyufacimke => {
-      return new Gyufacimke(
-        gyufacimke[0],
-        gyufacimke[1],
-        gyufacimke[2],
-        gyufacimke[3],
-        gyufacimke[4],
-        gyufacimke[5],
-        gyufacimke[6],
-        gyufacimke[7],
-        gyufacimke[8],
-        gyufacimke[9],
-        gyufacimke[10],
-        gyufacimke[11],
-        gyufacimke[12],
-        gyufacimke[13],
-        gyufacimke[14],
-        gyufacimke[15],
-        gyufacimke[16],
-        gyufacimke[17],
-        gyufacimke[18],
-        gyufacimke[19],
-        gyufacimke[20],
-        gyufacimke[21],
-        gyufacimke[22]
-      );
-    });
-
-    this.tableService.saveGyufacimke(gyufacimkeOutputObjects).subscribe({
-      complete: () => console.log('Sikeres mentés'),
-      error: err => console.error('Hiba történt', err)
-    });
-  }
-
   initializeTable() {
     let gyufacimke = new Gyufacimke(1, 100001, 0, '1970.01.01', 'Normál', 0, 0, '', '', 'Magyarország', '', 0, '', 'Gyűjtemény', '1970.01.01', '', 0, 0, '', '', 0, '');
 
@@ -110,13 +75,35 @@ export class TableComponent implements OnInit {
 
   addTableRow(index: number, amount: number, source?: any) {
     let previousGyufacimke = this.gyufacimkeInputData[index];
-    let gyufacimke = new Gyufacimke(previousGyufacimke.sorszam+1, previousGyufacimke.digitalizalasi_azon+1, 0, previousGyufacimke.nyilv_vetel_datum, previousGyufacimke.tipus, 0, 0, '', '', previousGyufacimke.orszag, '', previousGyufacimke.ev, '', previousGyufacimke.nyilvantartas, previousGyufacimke.beszerzesi_datum, previousGyufacimke.elado_neve, 0, 0, '', '', 0, '');
+    let gyufacimke = new Gyufacimke(previousGyufacimke.sorszam + 1, previousGyufacimke.digitalizalasi_azon + 1, 0, previousGyufacimke.nyilv_vetel_datum, previousGyufacimke.tipus, 0, 0, '', '', previousGyufacimke.orszag, '', previousGyufacimke.ev, '', previousGyufacimke.nyilvantartas, previousGyufacimke.beszerzesi_datum, previousGyufacimke.elado_neve, 0, 0, '', '', 0, '');
 
     this.tableService.addGyufacimke(gyufacimke).subscribe({
       complete: () => console.log('Insertion successful'),
       error: err => console.error('An error occurred', err)
     });
   }
+
+  updateTableData(changes: CellChange[] | null, source: ChangeSource) {
+    if (!changes) return;
+
+    let typedChanges = changes as [number, keyof Gyufacimke, any, any][];
+
+    typedChanges.forEach(([row, prop, oldVal, newVal]) => {
+      if (oldVal !== newVal) { // Check if the value has changed
+        let gyufacimkeToUpdate = this.gyufacimkeInputData[row];
+        gyufacimkeToUpdate[prop] = newVal as never; // Update the property
+
+        console.log(gyufacimkeToUpdate)
+
+        // Update the entity in the database
+        this.tableService.saveGyufacimke([gyufacimkeToUpdate]).subscribe({
+          complete: () => console.log('Update successful'),
+          error: err => console.error('An error occurred', err)
+        });
+      }
+    });
+  }
+
 
   deleteTableData(index: number, amount: number, physicalRows: number[], source?: any) {
     let gyufacimkesToDelete = physicalRows.map(row => {
@@ -152,6 +139,7 @@ export class TableComponent implements OnInit {
   getNyilvantartasNevek(): string[] {
     return this.nyilvantartasok.map(nyilvantartas => nyilvantartas.nev);
   }
+
   getOrszagok() {
     this.tableService.getAllOrszag().subscribe(orszagok => {
       this.orszagok = orszagok.map(orszag => {

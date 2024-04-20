@@ -1,4 +1,5 @@
 export class Gyufacimke {
+  [key: string]: any;
   private _id: string | undefined;
   private _sorszam: number;
   private _digitalizalasi_azon: number;

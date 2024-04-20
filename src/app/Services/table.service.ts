@@ -32,7 +32,7 @@ export class TableService {
       this.maxId = Math.max(...gyufacimkes.map(g => Number(g.id)));
 
       if (this.maxId === -Infinity) {
-        this.maxId = 0;
+        this.maxId = 100000;
       }
     });
   }
@@ -73,15 +73,8 @@ export class TableService {
 
   saveGyufacimke(gyufacimkek: Gyufacimke[]): Observable<void>{
     const observables = gyufacimkek.map(gyufacimke => {
-      const newGyufacimke = gyufacimke.toPlainObject();
-      if (newGyufacimke.id) {
-        // If id exists, update the document
-        const docRef = doc(this.firestore, 'gyufacimkek', newGyufacimke.id);
-        return from(updateDoc(docRef, newGyufacimke));
-      } else {
-        // If id does not exist, add a new document with auto-generated id
-        return from(addDoc(this.gyufacimkeCollection, newGyufacimke));
-      }
+        const docRef = doc(this.firestore, 'gyufacimkek', gyufacimke.id as string);
+        return from(updateDoc(docRef, gyufacimke));
     });
 
     return forkJoin(observables).pipe(map(() => {}));
