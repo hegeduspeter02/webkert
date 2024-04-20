@@ -7,6 +7,7 @@ import {HotTableModule, HotTableRegisterer} from "@handsontable/angular";
 import {CimkeTipus} from "../Entities/CimkeTipus";
 import {Nyilvantartas} from "../Entities/Nyilvantartas";
 import {Orszag} from "../Entities/Orszag";
+import {NgIf} from "@angular/common";
 
 // register Handsontable's modules
 registerAllModules();
@@ -14,7 +15,7 @@ registerAllModules();
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  imports: [HotTableModule],
+  imports: [HotTableModule, NgIf],
   standalone: true,
   styleUrl: './table.component.css'
 })
@@ -39,16 +40,11 @@ export class TableComponent implements OnInit {
     contextMenu: true,
     filters: true,
     dropdownMenu: true,
+    columnSorting: true,
     hiddenColumns: {
       columns: [],
       indicators: false
     },
-    /*columnSorting: {
-      initialConfig: {
-        column: 0,
-        sortOrder: "desc"
-      }
-    },*/
     beforeRemoveRow: this.deleteTableData.bind(this),
     beforeCreateRow: this.addTableRow.bind(this),
   };
@@ -103,9 +99,19 @@ export class TableComponent implements OnInit {
     });
   }
 
+  initializeTable() {
+    let gyufacimke = new Gyufacimke(1, 100001, 0, '1970.01.01', 'Normál', 0, 0, '', '', 'Magyarország', '', 0, '', 'Gyűjtemény', '1970.01.01', '', 0, 0, '', '', 0, '');
+
+    this.tableService.addGyufacimke(gyufacimke).subscribe({
+      complete: () => console.log('initialize successful'),
+      error: err => console.error('An error occurred', err)
+    });
+  }
+
   addTableRow(index: number, amount: number, source?: any) {
     let previousGyufacimke = this.gyufacimkeInputData[index];
-    let gyufacimke = new Gyufacimke(this.gyufacimkeInputData.length+1, this.gyufacimkeInputData.length+100001, 0, previousGyufacimke.nyilv_vetel_datum, previousGyufacimke.tipus, 0, 0, '', '', previousGyufacimke.orszag, '', previousGyufacimke.ev, '', previousGyufacimke.nyilvantartas, previousGyufacimke.beszerzesi_datum, previousGyufacimke.elado_neve, 0, 0, '', '', 0, '');
+    let gyufacimke = new Gyufacimke(previousGyufacimke.sorszam+1, previousGyufacimke.digitalizalasi_azon+1, 0, previousGyufacimke.nyilv_vetel_datum, previousGyufacimke.tipus, 0, 0, '', '', previousGyufacimke.orszag, '', previousGyufacimke.ev, '', previousGyufacimke.nyilvantartas, previousGyufacimke.beszerzesi_datum, previousGyufacimke.elado_neve, 0, 0, '', '', 0, '');
+
     this.tableService.addGyufacimke(gyufacimke).subscribe({
       complete: () => console.log('Insertion successful'),
       error: err => console.error('An error occurred', err)

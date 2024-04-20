@@ -1,10 +1,10 @@
 <script src="../Entities/Gyufacimke.ts"></script>
 <button (click)="getTableData()">Save Data</button>
+<button *ngIf="gyufacimkeInputData.length === 0" (click)="initializeTable()">Tábla inicializálása</button>
 <hot-table
   [settings]="hotSettings"
   [data]="gyufacimkeInputData"
-  [hotId]="tableId"
-  [columnSorting]="{initialConfig: {column: 1, sortOrder: 'desc'}}">
+  [hotId]="tableId">
   <hot-column data="sorszam" type="numeric" title="Sorszám"></hot-column>
   <hot-column data="digitalizalasi_azon" type="numeric" title="Digitális azonosító"></hot-column>
   <hot-column data="adatb_azon" type="numeric" title="Adatbázis azonosító"></hot-column>

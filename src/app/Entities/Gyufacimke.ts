@@ -1,5 +1,5 @@
 export class Gyufacimke {
-  private _id: string|undefined;
+  private _id: string | undefined;
   private _sorszam: number;
   private _digitalizalasi_azon: number;
   private _adatb_azon: number;

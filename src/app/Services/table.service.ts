@@ -11,7 +11,7 @@ import {
   deleteDoc
 } from "@angular/fire/firestore";
 import {Gyufacimke} from "../Entities/Gyufacimke";
-import {forkJoin, from, map, Observable} from "rxjs";
+import {forkJoin, from, map, Observable, switchMap} from "rxjs";
 import {Orszag} from "../Entities/Orszag";
 import {CimkeTipus} from "../Entities/CimkeTipus";
 import {Nyilvantartas} from "../Entities/Nyilvantartas";
@@ -25,6 +25,17 @@ export class TableService {
   gyufacimkeCollection = collection(this.firestore, 'gyufacimkek');
   cimkeTipusCollection = collection(this.firestore, 'cimke_tipusok');
   nyilvantartasCollection = collection(this.firestore, 'nyilvantartasok');
+  maxId : number | undefined;
+
+  constructor() {
+    this.getAllGyufacimke().subscribe(gyufacimkes => {
+      this.maxId = Math.max(...gyufacimkes.map(g => Number(g.id)));
+
+      if (this.maxId === -Infinity) {
+        this.maxId = 0;
+      }
+    });
+  }
 
   getAllGyufacimke(): Observable<Gyufacimke[]> {
     return collectionData(this.gyufacimkeCollection,
@@ -52,8 +63,12 @@ export class TableService {
 
   addGyufacimke(gyufacimke: Gyufacimke): Observable<void> {
     const newGyufacimke = gyufacimke.toPlainObject();
-    delete newGyufacimke.id;
-    return from(addDoc(this.gyufacimkeCollection, newGyufacimke)).pipe(map(() => {}));
+
+    newGyufacimke.id = String(this.maxId as number + 1);
+    console.log(this.maxId)
+
+    const docRef = doc(this.firestore, 'gyufacimkek', newGyufacimke.id);
+    return from(setDoc(docRef, newGyufacimke)).pipe(map(() => {}));
   }
 
   saveGyufacimke(gyufacimkek: Gyufacimke[]): Observable<void>{
