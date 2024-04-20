@@ -51,7 +51,7 @@ export class TableComponent implements OnInit {
     beforeRemoveRow: this.deleteTableData.bind(this),
     beforeCreateRow: this.addTableRow.bind(this),
     afterChange: this.updateTableData.bind(this),
-    colWidths: [110, 200, 200, 190, 250, 100, 100, 100, 140, 130, 150, 150, 75, 200, 150, 180, 200, 170, 180, 200, 180, 150, 140]
+    colWidths: [110, 200, 200, 190, 300, 100, 100, 100, 140, 130, 150, 150, 75, 200, 150, 180, 200, 170, 180, 200, 180, 150, 140]
   };
   gyufacimkeInputData: Gyufacimke[];
   cimkeTipusok: CimkeTipus[];
@@ -96,8 +96,6 @@ export class TableComponent implements OnInit {
         let gyufacimkeToUpdate = this.gyufacimkeInputData[row];
         gyufacimkeToUpdate[prop] = newVal as never; // Update the property
 
-        console.log(gyufacimkeToUpdate)
-
         // Update the entity in the database
         this.tableService.saveGyufacimke([gyufacimkeToUpdate]).subscribe({
           complete: () => console.log('Update successful'),
@@ -106,7 +104,6 @@ export class TableComponent implements OnInit {
       }
     });
   }
-
 
   deleteTableData(index: number, amount: number, physicalRows: number[], source?: any) {
     let gyufacimkesToDelete = physicalRows.map(row => {
@@ -125,7 +122,7 @@ export class TableComponent implements OnInit {
 
     let meret_x = instance.getDataAtCell(row, 6);
 
-    TD.innerHTML = '<img src="../../assets/images/'+ value +'.jpg" style="max-width:'+ meret_x*2 +'px" alt="kep" disableOptimizedSrcset>';
+    TD.innerHTML = '<img src="../../assets/images/'+ value +'.jpg" style="max-width:'+ meret_x*2.3 +'px" alt="kep" disableOptimizedSrcset>';
   }
 
   getCimkeTipusok() {
