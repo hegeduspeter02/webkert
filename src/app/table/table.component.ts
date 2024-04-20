@@ -9,6 +9,8 @@ import {Nyilvantartas} from "../Entities/Nyilvantartas";
 import {Orszag} from "../Entities/Orszag";
 import {NgIf} from "@angular/common";
 import {CellChange, ChangeSource} from "handsontable/common";
+import Core from "handsontable/core";
+import {CellProperties} from "handsontable/settings";
 
 // register Handsontable's modules
 registerAllModules();
@@ -43,7 +45,7 @@ export class TableComponent implements OnInit {
     dropdownMenu: true,
     columnSorting: true,
     hiddenColumns: {
-      columns: [],
+      columns: [22],
       indicators: false
     },
     beforeRemoveRow: this.deleteTableData.bind(this),
@@ -114,6 +116,22 @@ export class TableComponent implements OnInit {
       complete: () => console.log('Deletion successful'),
       error: err => console.error('An error occurred', err)
     });
+  }
+
+  imageRenderer(instance: Core, TD: HTMLTableCellElement, row:number, column:number, prop:string|number, value:any, cellProperties:CellProperties) {
+    const args: [Core, HTMLTableCellElement, number, number, string | number, any, CellProperties] = [instance, TD, row, column, prop, value, cellProperties];
+    Handsontable.renderers.TextRenderer.apply(this, args);
+
+    if(this.gyufacimkeInputData === undefined || this.gyufacimkeInputData.length === 0){
+      return;
+    }
+
+    let digitalizalasi_azon = value;
+    let matchingGyufacimke = this.gyufacimkeInputData.find(gyufacimke => gyufacimke.digitalizalasi_azon === digitalizalasi_azon);
+
+
+    // point to assets/images
+    TD.innerHTML = '<img src="../../assets/images/'+ value +'.jpg" style="max-width:' + matchingGyufacimke?.meret_x +'px" alt="kep">';
   }
 
   getCimkeTipusok() {
