@@ -3,7 +3,7 @@ import Handsontable from "handsontable";
 import {registerAllModules} from "handsontable/registry";
 import {TableService} from "../Services/table.service";
 import {Gyufacimke} from "../Entities/Gyufacimke";
-import {HotTableModule, HotTableRegisterer} from "@handsontable/angular";
+import {HotTableModule} from "@handsontable/angular";
 import {CimkeTipus} from "../Entities/CimkeTipus";
 import {Nyilvantartas} from "../Entities/Nyilvantartas";
 import {Orszag} from "../Entities/Orszag";
@@ -24,7 +24,6 @@ registerAllModules();
 })
 export class TableComponent implements OnInit {
   tableService = inject(TableService);
-  private hotRegisterer = new HotTableRegisterer();
   tableId = 'hotInstance';
   gyufacimkeInputData: Gyufacimke[];
   cimkeTipusok: CimkeTipus[];
@@ -108,7 +107,7 @@ export class TableComponent implements OnInit {
 
     let meret_x = instance.getDataAtCell(row, 6);
 
-    TD.innerHTML = '<img src="../../assets/images/'+ value +'.jpg" style="max-width:'+ meret_x*2.3 +'px" alt="kep" onClick="console.log(\'sa\')">';
+    TD.innerHTML = '<img src="../../assets/images/'+ value +'.jpg" style="max-width:'+ meret_x*2.3 +'px" alt="kep">';
   }
 
   getCimkeTipusok() {

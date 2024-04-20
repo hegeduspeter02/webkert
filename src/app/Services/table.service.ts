@@ -3,9 +3,7 @@ import {
   Firestore,
   collection,
   collectionData,
-  addDoc,
   doc,
-  getDoc,
   updateDoc,
   setDoc,
   deleteDoc
