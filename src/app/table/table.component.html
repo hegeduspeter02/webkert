@@ -8,7 +8,7 @@
   <hot-column data="digitalizalasi_azon" type="numeric" title="Digitális azonosító"></hot-column>
   <hot-column data="adatb_azon" type="numeric" title="Adatbázis azonosító"></hot-column>
   <hot-column data="nyilv_vetel_datum" title="Nyilv. vétel dátum" type="date" dateFormat="YYYY.MM.DD"></hot-column>
-  <hot-column className="htCenter" data="digitalizalasi_azon" title="Kép" [renderer]="imageRenderer" [readOnly]="true"></hot-column>
+  <hot-column className="htCenter" data="digitalizalasi_azon" title="Kép" [renderer]="imageRenderer" [readOnly]="false"></hot-column>
   <hot-column data="tipus" title="Típus" type="dropdown" [source]="getCimkeTipusNevek()"></hot-column>
   <hot-column data="meret_x" type="numeric" title="Méret x"></hot-column>
   <hot-column data="meret_y" type="numeric" title="Méret y"></hot-column>

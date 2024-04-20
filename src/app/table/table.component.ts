@@ -26,13 +26,11 @@ export class TableComponent implements OnInit {
   tableService = inject(TableService);
   private hotRegisterer = new HotTableRegisterer();
   tableId = 'hotInstance';
-
-  ngOnInit(): void {
-    this.getCimkeTipusok();
-    this.getNyilvantartasok();
-    this.getOrszagok();
-    this.getGyufacimke();
-  }
+  gyufacimkeInputData: Gyufacimke[];
+  cimkeTipusok: CimkeTipus[];
+  nyilvantartasok: Nyilvantartas[];
+  orszagok: Orszag[];
+  gyufacimkeOutputData: any[];
 
   hotSettings: Handsontable.GridSettings = {
     rowHeaders: true,
@@ -53,11 +51,13 @@ export class TableComponent implements OnInit {
     afterChange: this.updateTableData.bind(this),
     colWidths: [110, 200, 200, 190, 300, 100, 100, 100, 140, 130, 150, 150, 75, 200, 150, 180, 200, 170, 180, 200, 180, 150, 140]
   };
-  gyufacimkeInputData: Gyufacimke[];
-  cimkeTipusok: CimkeTipus[];
-  nyilvantartasok: Nyilvantartas[];
-  orszagok: Orszag[];
-  gyufacimkeOutputData: any[];
+
+  ngOnInit(): void {
+    this.getCimkeTipusok();
+    this.getNyilvantartasok();
+    this.getOrszagok();
+    this.getGyufacimke();
+  }
 
   constructor() {
     this.gyufacimkeInputData = [];
@@ -71,19 +71,13 @@ export class TableComponent implements OnInit {
   initializeTable() {
     let gyufacimke = new Gyufacimke(1, 100001, 0, '1970.01.01', 'Normál', 0, 0, '', '', 'Magyarország', '', 0, '', 'Gyűjtemény', '1970.01.01', '', 0, 0, '', '', 0, '');
 
-    this.tableService.addGyufacimke(gyufacimke).subscribe({
-      complete: () => console.log('initialize successful'),
-      error: err => console.error('An error occurred', err)
-    });
+    this.tableService.addGyufacimke(gyufacimke).subscribe();
   }
 
   addTableRow(index: number, amount: number, source?: any) {
     let previousGyufacimke = this.gyufacimkeInputData[index];
     let gyufacimke = new Gyufacimke(previousGyufacimke.sorszam + 1, Number(previousGyufacimke.digitalizalasi_azon) + 1, 0, previousGyufacimke.nyilv_vetel_datum, previousGyufacimke.tipus, 0, 0, '', '', previousGyufacimke.orszag, '', previousGyufacimke.ev, '', previousGyufacimke.nyilvantartas, previousGyufacimke.beszerzesi_datum, previousGyufacimke.elado_neve, 0, 0, '', '', 0, '');
-    this.tableService.addGyufacimke(gyufacimke).subscribe({
-      complete: () => console.log('Insertion successful'),
-      error: err => console.error('An error occurred', err)
-    });
+    this.tableService.addGyufacimke(gyufacimke).subscribe();
   }
 
   updateTableData(changes: CellChange[] | null, source: ChangeSource) {
@@ -96,11 +90,7 @@ export class TableComponent implements OnInit {
         let gyufacimkeToUpdate = this.gyufacimkeInputData[row];
         gyufacimkeToUpdate[prop] = newVal as never; // Update the property
 
-        // Update the entity in the database
-        this.tableService.saveGyufacimke([gyufacimkeToUpdate]).subscribe({
-          complete: () => console.log('Update successful'),
-          error: err => console.error('An error occurred', err)
-        });
+        this.tableService.saveGyufacimke([gyufacimkeToUpdate]).subscribe();
       }
     });
   }
@@ -110,10 +100,7 @@ export class TableComponent implements OnInit {
       return this.gyufacimkeInputData[row];
     });
 
-    this.tableService.deleteGyufacimke(gyufacimkesToDelete).subscribe({
-      complete: () => console.log('Deletion successful'),
-      error: err => console.error('An error occurred', err)
-    });
+    this.tableService.deleteGyufacimke(gyufacimkesToDelete).subscribe();
   }
 
   imageRenderer(instance: Core, TD: HTMLTableCellElement, row:number, column:number, prop:string|number, value:any, cellProperties:CellProperties) {
@@ -122,7 +109,7 @@ export class TableComponent implements OnInit {
 
     let meret_x = instance.getDataAtCell(row, 6);
 
-    TD.innerHTML = '<img src="../../assets/images/'+ value +'.jpg" style="max-width:'+ meret_x*2.3 +'px" alt="kep" disableOptimizedSrcset>';
+    TD.innerHTML = '<img src="../../assets/images/'+ value +'.jpg" style="max-width:'+ meret_x*2.3 +'px" alt="kep" onClick="console.log(\'sa\')">';
   }
 
   getCimkeTipusok() {
@@ -166,10 +153,6 @@ export class TableComponent implements OnInit {
       this.gyufacimkeInputData = gyufacimkek.map(gyufacimke => {
         return gyufacimke;
       });
-      console.log(this.gyufacimkeInputData);
     });
   }
-
-  protected readonly Number = Number;
-  protected readonly String = String;
 }
