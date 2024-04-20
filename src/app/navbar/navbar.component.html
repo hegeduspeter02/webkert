@@ -1,7 +1,9 @@
-<h1>Angular Router App</h1>
-<nav>
-  <ul>
-    <li><a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">Nyilvántartás</a></li>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span class="title">Gyufacímke nyilvántartás</span>
+    <span class="example-spacer"></span>
+    <li><a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page" [routerLinkActiveOptions]="{exact: true}">Nyilvántartás</a></li>
     <li><a routerLink="/about" routerLinkActive="active" ariaCurrentWhenActive="page">Projektről</a></li>
-  </ul>
-</nav>
+  </mat-toolbar-row>
+</mat-toolbar>
+

@@ -8,6 +8,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import {environment} from "../environments/environment";
 import {IMAGE_CONFIG} from "@angular/common";
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,6 +23,6 @@ export const appConfig: ApplicationConfig = {
         disableImageSizeWarning: true,
         disableImageLazyLoadWarning: true
       }
-    },
+    }, provideAnimationsAsync(),
   ],
 };
