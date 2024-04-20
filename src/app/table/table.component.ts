@@ -51,7 +51,7 @@ export class TableComponent implements OnInit {
     beforeRemoveRow: this.deleteTableData.bind(this),
     beforeCreateRow: this.addTableRow.bind(this),
     afterChange: this.updateTableData.bind(this),
-    colWidths: [100, 150, 150, 150, 250, 75, 75, 75, 100, 100, 100, 100, 50, 100, 120, 130, 150, 120, 130, 150, 130, 120, 120]
+    colWidths: [110, 200, 200, 190, 250, 100, 100, 100, 140, 130, 150, 150, 75, 200, 150, 180, 200, 170, 180, 200, 180, 150, 140]
   };
   gyufacimkeInputData: Gyufacimke[];
   cimkeTipusok: CimkeTipus[];
