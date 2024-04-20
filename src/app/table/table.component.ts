@@ -35,7 +35,6 @@ export class TableComponent implements OnInit {
   hotSettings: Handsontable.GridSettings = {
     rowHeaders: true,
     licenseKey: 'non-commercial-and-evaluation',
-    fixedColumnsStart: 4,
     autoWrapRow: true,
     autoWrapCol: false,
     contextMenu: true,

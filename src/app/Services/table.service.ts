@@ -65,7 +65,6 @@ export class TableService {
     const newGyufacimke = gyufacimke.toPlainObject();
 
     newGyufacimke.id = String(this.maxId as number + 1);
-    console.log(this.maxId)
 
     const docRef = doc(this.firestore, 'gyufacimkek', newGyufacimke.id);
     return from(setDoc(docRef, newGyufacimke)).pipe(map(() => {}));
