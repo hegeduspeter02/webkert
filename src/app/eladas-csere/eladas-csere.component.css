@@ -6,8 +6,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  margin-top: 20px;
-  margin-left: 20px;
+  margin: 20px 20px 0 20px;
 }
 mat-card-title{
   margin-bottom: 30px;
@@ -17,5 +16,17 @@ mat-card-content{
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.success-message{
+  background: lightgreen;
+  margin-bottom: 20px;
+  width: 100%;
+  font-size: 16px;
+}
+.error-message{
+  background: lightcoral;
+  margin-bottom: 20px;
+  width: 100%;
+  font-size: 16px;
 }
 

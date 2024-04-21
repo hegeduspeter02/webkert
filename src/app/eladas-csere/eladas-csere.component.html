@@ -1,4 +1,9 @@
 <div class="form-container">
+  <mat-card *ngIf="showSuccessMessage" class="success-message">
+    <mat-card-content>
+      Sikeres rögzítés!
+    </mat-card-content>
+  </mat-card>
   <mat-card>
     <mat-card-header>
       <mat-card-title>Eladás/Csere rögzítése</mat-card-title>
@@ -14,7 +19,7 @@
             <mat-icon matSuffix>handshake</mat-icon>
           </mat-form-field>
         </div>
-<!--
+
         <div class="row">
           <mat-form-field>
             <mat-label>Eladás/Csere dátum</mat-label>
@@ -22,7 +27,7 @@
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
-        </div>-->
+        </div>
 
         <div class="row">
           <mat-form-field>
@@ -30,6 +35,7 @@
             <textarea formControlName="comment" matInput></textarea>
           </mat-form-field>
         </div>
+
 
         <div class="row">
           <mat-form-field>
