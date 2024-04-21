@@ -36,18 +36,19 @@ export class TableComponent implements OnInit {
     licenseKey: 'non-commercial-and-evaluation',
     autoWrapRow: true,
     autoWrapCol: false,
-    contextMenu: true,
+    contextMenu: ['row_above', 'row_below', '---------', 'remove_row', '---------', 'hidden_columns_hide', 'hidden_columns_show', '---------', 'copy', 'cut'],
     filters: true,
     dropdownMenu: true,
     columnSorting: true,
     hiddenColumns: {
       columns: [23],
-      indicators: false
+      indicators: true,
+      copyPasteEnabled: false
     },
     beforeRemoveRow: this.deleteTableData.bind(this),
     beforeCreateRow: this.addTableRow.bind(this),
     afterChange: this.updateTableData.bind(this),
-    colWidths: [110, 200, 200, 190, 300, 100, 100, 100, 140, 130, 150, 150, 75, 200, 150, 180, 200, 170, 180, 200, 180, 150, 140]
+    colWidths: [110, 200, 200, 220, 300, 130, 100, 100, 140, 130, 150, 150, 75, 200, 150, 180, 200, 170, 180, 200, 180, 150, 140],
   };
 
   ngOnInit(): void {
