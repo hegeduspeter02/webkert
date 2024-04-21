@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import { MatFormFieldModule, MatHint, MatLabel} from "@angular/material/form-field";
 import { MatInputModule} from "@angular/material/input";
 import { MatIconModule} from "@angular/material/icon";
@@ -26,13 +26,13 @@ import * as console from "console";
     ReactiveFormsModule,
     MatButtonModule,
     MatCardModule,
-    MatRadioModule
+    MatRadioModule,
   ],
   templateUrl: './eladas-csere.component.html',
   styleUrl: './eladas-csere.component.css',
   providers: [provideNativeDateAdapter()],
 })
-export class EladasCsereComponent {
+export class EladasCsereComponent{
   eladasCsereForm = this.formBuilder.group({
     partnerName: ['', Validators.required],
     sellDate: ['', Validators.required],
@@ -41,8 +41,7 @@ export class EladasCsereComponent {
     transactionType: ['', Validators.required]
   });
 
-  constructor(private formBuilder: FormBuilder) {
-  }
+  constructor(private formBuilder: FormBuilder) {}
 
   onSubmit() {
     if(this.eladasCsereForm.valid){
