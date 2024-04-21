@@ -10,6 +10,7 @@ import {ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import {FormBuilder} from "@angular/forms";
+import {MatRadioModule} from "@angular/material/radio";
 import * as console from "console";
 
 @Component({
@@ -24,7 +25,8 @@ import * as console from "console";
     MatDatepickerModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatRadioModule
   ],
   templateUrl: './eladas-csere.component.html',
   styleUrl: './eladas-csere.component.css',
@@ -36,12 +38,15 @@ export class EladasCsereComponent {
     sellDate: ['', Validators.required],
     comment: [''],
     sellPrice: ['', Validators.required],
+    transactionType: ['', Validators.required]
   });
 
   constructor(private formBuilder: FormBuilder) {
   }
 
   onSubmit() {
-    console.log(this.eladasCsereForm.value)
+    if(this.eladasCsereForm.valid){
+      console.log(this.eladasCsereForm.value);
+    }
   }
 }
