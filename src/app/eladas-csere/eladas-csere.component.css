@@ -1,21 +1,9 @@
-.row{
-  margin-bottom: 10px;
-}
 .form-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   margin: 20px 50px 0 50px;
-}
-mat-card-title{
-  margin-bottom: 30px;
-}
-mat-card-content{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 .success-message{
   background: lightgreen;
@@ -34,9 +22,9 @@ mat-card-content{
   justify-content: space-between;
   width: 100%;
 }
-.card-container mat-card:first-child {
+.card-container app-create {
   margin-right: 50px;
 }
-.card-container mat-card:last-child {
+.card-container app-update-delete {
   flex: 1;
 }

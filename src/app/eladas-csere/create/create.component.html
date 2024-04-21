@@ -1,0 +1,57 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Eladás/Csere rögzítése</mat-card-title>
+  </mat-card-header>
+
+  <form [formGroup]="eladasCsereForm" (ngSubmit)="onSubmit()">
+    <mat-card-content>
+
+      <div class="row">
+        <mat-form-field>
+          <mat-label>Vevő/Partner neve</mat-label>
+          <input id="partnerName" type="text" formControlName="partnerName" matInput>
+          <mat-icon matSuffix>handshake</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field>
+          <mat-label>Eladás/Csere dátum</mat-label>
+          <input id="sellDate" matInput [matDatepicker]="picker" formControlName="sellDate">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field>
+          <mat-label>Megjegyzés</mat-label>
+          <textarea formControlName="comment" matInput></textarea>
+        </mat-form-field>
+      </div>
+
+
+      <div class="row">
+        <mat-form-field>
+          <mat-label>Eladási/Csere ár</mat-label>
+          <input formControlName="sellPrice" matInput #price>
+          <mat-hint align="end">{{ price.value }} Ft</mat-hint>
+          <mat-icon matSuffix>payments</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-radio-group aria-label="Eladás/Csere" formControlName="transactionType">
+          <mat-radio-button value="1">Eladás</mat-radio-button>
+          <mat-radio-button value="2">Csere</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="row">
+        <button mat-flat-button color="primary">Rögzítés</button>
+      </div>
+    </mat-card-content>
+
+  </form>
+
+</mat-card>

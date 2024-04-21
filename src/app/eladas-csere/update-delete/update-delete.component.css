@@ -1,0 +1,13 @@
+.row{
+  margin-bottom: 10px;
+}
+mat-card-title{
+  margin-bottom: 30px;
+}
+mat-card-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
