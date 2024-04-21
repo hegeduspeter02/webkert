@@ -12,8 +12,7 @@ import {MatCardModule} from "@angular/material/card";
 import {FormBuilder} from "@angular/forms";
 import {MatRadioModule} from "@angular/material/radio";
 import {EladasCsere} from "../Entities/EladasCsere";
-import {TableService} from "../Services/table.service";
-import {EladasCsereService} from "../Services/eladas-csere.service";
+import {EladasCsereService} from "../Services/eladas-csere/eladas-csere.service";
 import {NgIf} from "@angular/common";
 
 @Component({
@@ -36,7 +35,7 @@ import {NgIf} from "@angular/common";
   styleUrl: './eladas-csere.component.css',
   providers: [provideNativeDateAdapter()],
 })
-export class EladasCsereComponent{
+export class EladasCsereComponent implements OnInit{
   eladasCsereForm = this.formBuilder.group({
     partnerName: ['', Validators.required],
     sellDate: ['', Validators.required],
@@ -44,11 +43,23 @@ export class EladasCsereComponent{
     sellPrice: ['', Validators.required],
     transactionType: ['', Validators.required]
   });
-  tableService = inject(EladasCsereService);
+  eladasCsereService = inject(EladasCsereService);
+  eladasCserek: EladasCsere[];
   showSuccessMessage = false;
   showFailMessage = false;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder) {
+    this.eladasCserek = [];
+  }
+
+  ngOnInit(): void {
+    this.eladasCsereService.getAllEladasCsere().subscribe(eladacs_cserek => {
+      this.eladasCserek = eladacs_cserek.map(eladas_csere => {
+        return eladas_csere;
+      });
+      console.log(this.eladasCserek);
+    });
+  }
 
   onSubmit() {
     if(this.eladasCsereForm.valid){
@@ -57,7 +68,7 @@ export class EladasCsereComponent{
         this.eladasCsereForm.value.partnerName as string, Number(this.eladasCsereForm.value.sellPrice),
         this.eladasCsereForm.value.comment as string, Number(this.eladasCsereForm.value.transactionType));
 
-      this.tableService.addEladasCsere(eladasCsere).subscribe(
+      this.eladasCsereService.addEladasCsere(eladasCsere).subscribe(
         () => {
           this.showSuccessMessage = true;
         },

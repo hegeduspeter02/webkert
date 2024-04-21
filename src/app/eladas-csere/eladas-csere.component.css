@@ -6,7 +6,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  margin: 20px 20px 0 20px;
+  margin: 20px 50px 0 50px;
 }
 mat-card-title{
   margin-bottom: 30px;
@@ -29,4 +29,14 @@ mat-card-content{
   width: 100%;
   font-size: 16px;
 }
-
+.card-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.card-container mat-card:first-child {
+  margin-right: 50px;
+}
+.card-container mat-card:last-child {
+  flex: 1;
+}

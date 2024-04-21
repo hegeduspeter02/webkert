@@ -8,7 +8,7 @@ import {
   setDoc,
   deleteDoc
 } from "@angular/fire/firestore";
-import {EladasCsere} from "../Entities/EladasCsere";
+import {EladasCsere} from "../../Entities/EladasCsere";
 import {forkJoin, from, map, Observable, switchMap} from "rxjs";
 
 @Injectable({
