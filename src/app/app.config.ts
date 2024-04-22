@@ -1,4 +1,4 @@
-import {ApplicationConfig, importProvidersFrom, Injectable} from '@angular/core';
+import {ApplicationConfig, importProvidersFrom, Injectable, Provider} from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -9,6 +9,7 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 import {environment} from "../environments/environment";
 import {IMAGE_CONFIG} from "@angular/common";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AppFirebaseModule } from './app.firebase.module';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,6 +18,7 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(provideAuth(() => getAuth())),
     importProvidersFrom(provideFirestore(() => getFirestore())),
     importProvidersFrom(provideStorage(() => getStorage())),
+    importProvidersFrom(AppFirebaseModule),
     {
       provide: IMAGE_CONFIG,
       useValue: {

@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {TableComponent} from "./table/table.component";
 import {NavbarComponent} from "./navbar/navbar.component";
+import {AuthService} from "./Services/auth/auth.service";
 
 @Component({
   selector: 'app-root',

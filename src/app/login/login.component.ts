@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { MatCardContent, MatCardHeader, MatCardModule, MatCardTitle} from "@angular/material/card";
 import {MatInputModule} from "@angular/material/input";
 import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -25,23 +25,20 @@ import {CommonModule} from "@angular/common";
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  authService = inject(AuthService);
+
   loginForm = this.formBuilder.group({
     username: ['', Validators.required],
     password: ['', Validators.required],
   });
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) {
+  constructor(private formBuilder: FormBuilder) {
   }
 
-  login() {
-    this.authService.login(String(this.loginForm.value.username), String(this.loginForm.value.password)).then(
-      (cred) => {
-        console.log(cred);
-      }
-    ).catch(
-      (error) => {
-        console.log(error);
-      }
-    );
+  loginUser() {
+    if (this.loginForm.valid) {
+      console.log(this.loginForm.value)
+    }
+    this.authService.login(String(this.loginForm.value.username), String(this.loginForm.value.password)).then(() => { console.log('login successful') });
   }
 }
