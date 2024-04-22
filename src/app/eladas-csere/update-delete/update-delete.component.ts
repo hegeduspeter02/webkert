@@ -9,6 +9,8 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatIcon} from "@angular/material/icon";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
+import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
+import {MatButton} from "@angular/material/button";
 
 @Component({
   selector: 'app-update-delete',
@@ -30,7 +32,10 @@ import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/m
     MatDatepicker,
     MatDatepickerInput,
     MatDatepickerToggle,
-    AsyncPipe
+    AsyncPipe,
+    MatRadioButton,
+    MatRadioGroup,
+    MatButton
   ],
   templateUrl: './update-delete.component.html',
   styleUrl: './update-delete.component.css'
@@ -38,16 +43,16 @@ import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/m
 export class UpdateDeleteComponent implements OnInit {
   eladasCsereService = inject(EladasCsereService);
   eladasCserek: EladasCsere[];
+  selectedEladasCsereId: string | undefined;
   panelOpenState = false;
 
   eladasCsereUpdateForm = this.formBuilder.group({
-      partnerNameModify: ['', Validators.required],
-      sellDateModify: ['', Validators.required],
-      commentModify: [''],
-      sellPriceModify: ['', Validators.required],
-      transactionTypeModify: ['', Validators.required]
-    }
-  );
+    partnerNameModify: ['', Validators.required],
+    sellDateModify: ['', Validators.required],
+    commentModify: [''],
+    sellPriceModify: ['', Validators.required],
+    transactionTypeModify: ['', Validators.required]
+  });
 
   constructor(private formBuilder: FormBuilder) {
     this.eladasCserek = [];
@@ -62,6 +67,6 @@ export class UpdateDeleteComponent implements OnInit {
   }
 
   onSubmit() {
-
+    console.log(this.selectedEladasCsereId);
   }
 }
