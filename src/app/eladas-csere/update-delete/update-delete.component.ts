@@ -3,6 +3,8 @@ import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/mat
 import {EladasCsere} from "../../Entities/EladasCsere";
 import {FormBuilder} from "@angular/forms";
 import {EladasCsereService} from "../../Services/eladas-csere/eladas-csere.service";
+import {MatExpansionModule} from "@angular/material/expansion";
+import {DatePipe, NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-update-delete',
@@ -11,14 +13,19 @@ import {EladasCsereService} from "../../Services/eladas-csere/eladas-csere.servi
     MatCard,
     MatCardHeader,
     MatCardTitle,
-    MatCardContent
+    MatCardContent,
+    MatExpansionModule,
+    NgForOf,
+    DatePipe
   ],
   templateUrl: './update-delete.component.html',
   styleUrl: './update-delete.component.css'
 })
 export class UpdateDeleteComponent implements OnInit{
-  eladasCserek: EladasCsere[];
   eladasCsereService = inject(EladasCsereService);
+  eladasCserek: EladasCsere[];
+  panelOpenState = false;
+
   constructor(private formBuilder: FormBuilder) {
     this.eladasCserek = [];
   }
@@ -26,6 +33,7 @@ export class UpdateDeleteComponent implements OnInit{
   ngOnInit(): void {
     this.eladasCsereService.getAllEladasCsere().subscribe(eladacs_cserek => {
       this.eladasCserek = eladacs_cserek.map(eladas_csere => {
+          eladas_csere.datum = String(eladas_csere.datum).toDate(); // Convert Firebase Timestamp to JavaScript Date
         return eladas_csere;
       });
       console.log(this.eladasCserek);

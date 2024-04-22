@@ -10,4 +10,10 @@ mat-card-content{
   justify-content: center;
   align-items: center;
 }
-
+mat-accordion{
+  width: 100%;
+}
+mat-panel-description{
+  display: flex;
+  justify-content: space-between;
+}
