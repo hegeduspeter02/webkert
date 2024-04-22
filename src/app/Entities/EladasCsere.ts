@@ -1,12 +1,12 @@
 export class EladasCsere {
   private _id: string|undefined;
-  private _datum: string;
+  private _datum: Date;
   private _vevo: string;
   private _eladasi_ar: number;
   private _megjegyzes: string;
   private _tranzakcio_tipusa: number;
 
-  constructor(datum: string, vevo: string, eladasi_ar: number, megjegyzes: string, tranzakcio_tipusa: number, id?: string | undefined) {
+  constructor(datum: Date, vevo: string, eladasi_ar: number, megjegyzes: string, tranzakcio_tipusa: number, id?: string | undefined) {
     this._id = id;
     this._datum = datum;
     this._vevo = vevo;
@@ -34,11 +34,11 @@ export class EladasCsere {
     this._id = value;
   }
 
-  get datum(): string {
+  get datum(): Date {
     return this._datum;
   }
 
-  set datum(value: string) {
+  set datum(value: Date) {
     this._datum = value;
   }
 

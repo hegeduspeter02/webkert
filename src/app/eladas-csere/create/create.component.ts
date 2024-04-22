@@ -52,8 +52,8 @@ export class CreateComponent {
 
   onSubmit() {
     if(this.eladasCsereForm.valid){
-      let sellDate = (this.eladasCsereForm.value.sellDate?.toString() || '');
-      let eladasCsere = new EladasCsere(sellDate,
+      let sellDate = (this.eladasCsereForm.value.sellDate || new Date());
+      let eladasCsere = new EladasCsere(sellDate as Date,
         this.eladasCsereForm.value.partnerName as string, Number(this.eladasCsereForm.value.sellPrice),
         this.eladasCsereForm.value.comment as string, Number(this.eladasCsereForm.value.transactionType));
 

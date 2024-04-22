@@ -10,12 +10,14 @@
   margin-bottom: 20px;
   width: 100%;
   font-size: 16px;
+  text-align: center;
 }
 .error-message{
   background: lightcoral;
   margin-bottom: 20px;
   width: 100%;
   font-size: 16px;
+  text-align: center;
 }
 .card-container {
   display: flex;
