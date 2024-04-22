@@ -67,6 +67,21 @@ export class UpdateDeleteComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.selectedEladasCsereId);
+    if (this.eladasCsereUpdateForm.valid) {
+      let sellDate = (this.eladasCsereUpdateForm.value.sellDateModify || new Date());
+      let eladasCsere = new EladasCsere(sellDate as Date,
+        this.eladasCsereUpdateForm.value.partnerNameModify as string, Number(this.eladasCsereUpdateForm.value.sellPriceModify),
+        this.eladasCsereUpdateForm.value.commentModify as string, Number(this.eladasCsereUpdateForm.value.transactionTypeModify), this.selectedEladasCsereId);
+
+      this.eladasCsereService.updateEladasCsere(eladasCsere).subscribe(
+        () => {
+          this.eladasCsereService.getAllEladasCsere().subscribe(eladacs_cserek => {
+            this.eladasCserek = eladacs_cserek.map(eladas_csere => {
+              return eladas_csere;
+            });
+          });
+        }
+      );
+    }
   }
 }
