@@ -8,11 +8,11 @@ import {
   setDoc,
   deleteDoc
 } from "@angular/fire/firestore";
-import {Gyufacimke} from "../Entities/Gyufacimke";
+import {Gyufacimke} from "../../Entities/Gyufacimke";
 import {forkJoin, from, map, Observable, switchMap} from "rxjs";
-import {Orszag} from "../Entities/Orszag";
-import {CimkeTipus} from "../Entities/CimkeTipus";
-import {Nyilvantartas} from "../Entities/Nyilvantartas";
+import {Orszag} from "../../Entities/Orszag";
+import {CimkeTipus} from "../../Entities/CimkeTipus";
+import {Nyilvantartas} from "../../Entities/Nyilvantartas";
 
 @Injectable({
   providedIn: 'root'

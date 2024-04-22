@@ -1,7 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import Handsontable from "handsontable";
 import {registerAllModules} from "handsontable/registry";
-import {TableService} from "../Services/table.service";
+import {TableService} from "../Services/table/table.service";
 import {Gyufacimke} from "../Entities/Gyufacimke";
 import {HotTableModule} from "@handsontable/angular";
 import {CimkeTipus} from "../Entities/CimkeTipus";
@@ -11,6 +11,8 @@ import {NgIf} from "@angular/common";
 import {CellChange, ChangeSource} from "handsontable/common";
 import Core from "handsontable/core";
 import {CellProperties} from "handsontable/settings";
+import {EladasCsere} from "../Entities/EladasCsere";
+import {EladasCsereService} from "../Services/eladas-csere/eladas-csere.service";
 
 // register Handsontable's modules
 registerAllModules();
@@ -24,12 +26,14 @@ registerAllModules();
 })
 export class TableComponent implements OnInit {
   tableService = inject(TableService);
+  eladasCsereService = inject(EladasCsereService);
   tableId = 'hotInstance';
   gyufacimkeInputData: Gyufacimke[];
   cimkeTipusok: CimkeTipus[];
   nyilvantartasok: Nyilvantartas[];
   orszagok: Orszag[];
   gyufacimkeOutputData: any[];
+  eladasCserek: EladasCsere[];
 
   hotSettings: Handsontable.GridSettings = {
     rowHeaders: true,
@@ -48,13 +52,14 @@ export class TableComponent implements OnInit {
     beforeRemoveRow: this.deleteTableData.bind(this),
     beforeCreateRow: this.addTableRow.bind(this),
     afterChange: this.updateTableData.bind(this),
-    colWidths: [110, 200, 200, 220, 300, 130, 100, 100, 140, 130, 150, 150, 75, 200, 150, 180, 200, 170, 180, 200, 180, 150, 140],
+    colWidths: [110, 200, 200, 220, 300, 130, 100, 100, 140, 130, 150, 150, 75, 200, 150, 180, 200, 170, 180, 200, 180, 150, 200],
   };
 
   ngOnInit(): void {
     this.getCimkeTipusok();
     this.getNyilvantartasok();
     this.getOrszagok();
+    this.getEladasCserek();
     this.getGyufacimke();
   }
 
@@ -64,6 +69,7 @@ export class TableComponent implements OnInit {
     this.nyilvantartasok = [];
     this.orszagok = [];
     this.gyufacimkeOutputData = [];
+    this.eladasCserek = [];
     this.imageRenderer.bind(this);
   }
 
@@ -147,6 +153,28 @@ export class TableComponent implements OnInit {
     return this.orszagok.map(orszag => orszag.nev);
   }
 
+  getEladasCserek() {
+    this.eladasCsereService.getAllEladasCsere().subscribe(eladas_cserek => {
+      this.eladasCserek = eladas_cserek.map(eladas_csere => {
+        return eladas_csere;
+      });
+    });
+  }
+
+  getEladasCserekString(): string[] {
+    let result: string[] = [];
+    for(let eladasCsere of this.eladasCserek) {
+      if(eladasCsere.tranzakcio_tipusa === 1){
+        result.push('Eladás, vevő neve: ' + eladasCsere.vevo + ', ideje: ' + eladasCsere.datum.toDateString() + ', ár: ' + eladasCsere.eladasi_ar + ' Ft, megjegyzés: ' + eladasCsere.megjegyzes);
+      }
+      else{
+        result.push('Csere, partner neve: ' + eladasCsere.vevo + ', ideje: ' + eladasCsere.datum.toDateString() + ', ár: ' + eladasCsere.eladasi_ar + ' Ft, megjegyzés: ' + eladasCsere.megjegyzes);
+      }
+    }
+
+    return result;
+  }
+
   getGyufacimke() {
     this.tableService.getAllGyufacimke().subscribe(gyufacimkek => {
       this.gyufacimkeInputData = gyufacimkek.map(gyufacimke => {
@@ -154,4 +182,6 @@ export class TableComponent implements OnInit {
       });
     });
   }
+
+
 }
