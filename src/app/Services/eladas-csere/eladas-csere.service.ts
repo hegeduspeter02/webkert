@@ -9,7 +9,7 @@ import {
     deleteDoc
 } from "@angular/fire/firestore";
 import {EladasCsere} from "../../Entities/EladasCsere";
-import {forkJoin, from, map, Observable, switchMap} from "rxjs";
+import {forkJoin, from, map, Observable} from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -51,5 +51,10 @@ export class EladasCsereService {
   updateEladasCsere(eladasCsere: EladasCsere): Observable<void>{
     const docRef = doc(this.firestore, 'eladas_cserek', eladasCsere.id as string);
     return from(updateDoc(docRef, eladasCsere.toPlainObject()));
+  }
+
+  deleteEladasCsere(eladasCsereId: string): Observable<void> {
+    const docRef = doc(this.firestore, 'eladas_cserek', eladasCsereId);
+    return from(deleteDoc(docRef));
   }
 }

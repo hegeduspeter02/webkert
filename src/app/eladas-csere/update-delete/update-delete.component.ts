@@ -1,7 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
 import {EladasCsere} from "../../Entities/EladasCsere";
-import {FormArray, FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {EladasCsereService} from "../../Services/eladas-csere/eladas-csere.service";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {AsyncPipe, DatePipe, NgForOf, NgIf} from "@angular/common";
@@ -11,6 +11,7 @@ import {MatIcon} from "@angular/material/icon";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import {MatButton} from "@angular/material/button";
+import {MatButtonModule} from "@angular/material/button";
 
 @Component({
   selector: 'app-update-delete',
@@ -35,7 +36,8 @@ import {MatButton} from "@angular/material/button";
     AsyncPipe,
     MatRadioButton,
     MatRadioGroup,
-    MatButton
+    MatButton,
+    MatButtonModule
   ],
   templateUrl: './update-delete.component.html',
   styleUrl: './update-delete.component.css'
@@ -83,5 +85,17 @@ export class UpdateDeleteComponent implements OnInit {
         }
       );
     }
+  }
+
+  onDelete() {
+    this.eladasCsereService.deleteEladasCsere(this.selectedEladasCsereId as string).subscribe(
+      () => {
+        this.eladasCsereService.getAllEladasCsere().subscribe(eladacs_cserek => {
+          this.eladasCserek = eladacs_cserek.map(eladas_csere => {
+            return eladas_csere;
+          });
+        });
+      }
+    );
   }
 }
