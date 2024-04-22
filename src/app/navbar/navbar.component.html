@@ -8,10 +8,10 @@
     <span *ngIf="!isLoggedIn()">
       <li><a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">Bejelentkezés</a></li>
     </span>
+    <li><a routerLink="/about" routerLinkActive="active" ariaCurrentWhenActive="page">Projektről</a></li>
     <span *ngIf="isLoggedIn()">
       <li><a (click)="logout()" routerLink="/logout" routerLinkActive="active" ariaCurrentWhenActive="page">Kijentkezés</a></li>
     </span>
-    <li><a routerLink="/about" routerLinkActive="active" ariaCurrentWhenActive="page">Projektről</a></li>
   </mat-toolbar-row>
 </mat-toolbar>
 
