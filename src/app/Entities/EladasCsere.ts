@@ -26,6 +26,17 @@ export class EladasCsere {
     }
   }
 
+  static fromFirestore(doc: any): EladasCsere {
+    return new EladasCsere(
+      doc.datum.toDate(),
+      doc.vevo,
+      doc.eladasi_ar,
+      doc.megjegyzes,
+      doc.tranzakcio_tipusa,
+      doc.id
+    );
+  }
+
   get id(): string | undefined {
     return this._id;
   }

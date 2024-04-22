@@ -33,10 +33,8 @@ export class UpdateDeleteComponent implements OnInit{
   ngOnInit(): void {
     this.eladasCsereService.getAllEladasCsere().subscribe(eladacs_cserek => {
       this.eladasCserek = eladacs_cserek.map(eladas_csere => {
-          eladas_csere.datum = String(eladas_csere.datum).toDate(); // Convert Firebase Timestamp to JavaScript Date
         return eladas_csere;
       });
-      console.log(this.eladasCserek);
     });
   }
 }
