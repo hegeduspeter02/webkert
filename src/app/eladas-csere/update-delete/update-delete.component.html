@@ -60,16 +60,20 @@
                       matInput></textarea>
           </mat-form-field>
 
-          <mat-radio-group aria-label="Eladás/Csere" formControlName="transactionTypeModify">
-            <mat-radio-button value="1">Eladás</mat-radio-button>
-            <mat-radio-button value="2">Csere</mat-radio-button>
-          </mat-radio-group>
+          <div class="row">
+            <mat-radio-group aria-label="Eladás/Csere" formControlName="transactionTypeModify">
+              <mat-radio-button value="1">Eladás</mat-radio-button>
+              <mat-radio-button value="2">Csere</mat-radio-button>
+            </mat-radio-group>
+          </div>
 
-          <button mat-flat-button color="primary">Frissítés</button>
 
-          <button mat-flat-button color="warn" (click)="onDelete()">
-            <mat-icon>delete</mat-icon>
-          </button>
+            <button mat-flat-button color="primary">Frissítés</button>
+
+            <button mat-flat-button color="warn" (click)="onDelete()">
+              <mat-icon>delete</mat-icon>
+            </button>
+
         </form>
 
       </mat-expansion-panel>
