@@ -165,10 +165,10 @@ export class TableComponent implements OnInit {
     let result: string[] = [];
     for(let eladasCsere of this.eladasCserek) {
       if(eladasCsere.tranzakcio_tipusa === 1){
-        result.push('Eladás, vevő neve: ' + eladasCsere.vevo + ', ideje: ' + eladasCsere.datum.toDateString() + ', ár: ' + eladasCsere.eladasi_ar + ' Ft, megjegyzés: ' + eladasCsere.megjegyzes);
+        result.push('Eladás, vevő neve: ' + eladasCsere.vevo + ', ideje: ' + eladasCsere.datum + ', ár: ' + eladasCsere.eladasi_ar + ' Ft, megjegyzés: ' + eladasCsere.megjegyzes);
       }
       else{
-        result.push('Csere, partner neve: ' + eladasCsere.vevo + ', ideje: ' + eladasCsere.datum.toDateString() + ', ár: ' + eladasCsere.eladasi_ar + ' Ft, megjegyzés: ' + eladasCsere.megjegyzes);
+        result.push('Csere, partner neve: ' + eladasCsere.vevo + ', ideje: ' + eladasCsere.datum + ', ár: ' + eladasCsere.eladasi_ar + ' Ft, megjegyzés: ' + eladasCsere.megjegyzes);
       }
     }
 

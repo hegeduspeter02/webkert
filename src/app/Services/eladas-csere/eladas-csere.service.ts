@@ -33,9 +33,7 @@ export class EladasCsereService {
         return collectionData(this.nyilvantartasCollection,
             {
                 idField: 'id'
-            }).pipe(
-            map(docs => docs.map(EladasCsere.fromFirestore))
-        ) as Observable<EladasCsere[]>;
+            }) as Observable<EladasCsere[]>;
     }
 
     addEladasCsere(eladas_csere: EladasCsere): Observable<void> {

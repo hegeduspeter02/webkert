@@ -1,12 +1,12 @@
 export class EladasCsere {
   private _id: string|undefined;
-  private _datum: Date;
+  private _datum: string;
   private _vevo: string;
   private _eladasi_ar: number;
   private _megjegyzes: string;
   private _tranzakcio_tipusa: number;
 
-  constructor(datum: Date, vevo: string, eladasi_ar: number, megjegyzes: string, tranzakcio_tipusa: number, id?: string | undefined) {
+  constructor(datum: string, vevo: string, eladasi_ar: number, megjegyzes: string, tranzakcio_tipusa: number, id?: string | undefined) {
     this._id = id;
     this._datum = datum;
     this._vevo = vevo;
@@ -26,17 +26,6 @@ export class EladasCsere {
     }
   }
 
-  static fromFirestore(doc: any): EladasCsere {
-    return new EladasCsere(
-      doc.datum.toDate(),
-      doc.vevo,
-      doc.eladasi_ar,
-      doc.megjegyzes,
-      doc.tranzakcio_tipusa,
-      doc.id
-    );
-  }
-
   get id(): string | undefined {
     return this._id;
   }
@@ -45,11 +34,11 @@ export class EladasCsere {
     this._id = value;
   }
 
-  get datum(): Date {
+  get datum(): string {
     return this._datum;
   }
 
-  set datum(value: Date) {
+  set datum(value: string) {
     this._datum = value;
   }
 

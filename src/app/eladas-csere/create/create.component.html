@@ -17,9 +17,8 @@
       <div class="row">
         <mat-form-field>
           <mat-label>Eladás/Csere dátum</mat-label>
-          <input id="sellDate" matInput [matDatepicker]="picker" formControlName="sellDate">
-          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+          <input id="sellDate" matInput formControlName="sellDate">
+          <mat-icon matSuffix>calendar_month</mat-icon>
         </mat-form-field>
       </div>
 

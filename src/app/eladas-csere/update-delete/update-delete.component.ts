@@ -71,7 +71,7 @@ export class UpdateDeleteComponent implements OnInit {
   onSubmit() {
     if (this.eladasCsereUpdateForm.valid) {
       let sellDate = (this.eladasCsereUpdateForm.value.sellDateModify || new Date());
-      let eladasCsere = new EladasCsere(sellDate as Date,
+      let eladasCsere = new EladasCsere(this.eladasCsereUpdateForm.value.sellDateModify as string,
         this.eladasCsereUpdateForm.value.partnerNameModify as string, Number(this.eladasCsereUpdateForm.value.sellPriceModify),
         this.eladasCsereUpdateForm.value.commentModify as string, Number(this.eladasCsereUpdateForm.value.transactionTypeModify), this.selectedEladasCsereId);
 
@@ -97,5 +97,13 @@ export class UpdateDeleteComponent implements OnInit {
         });
       }
     );
+  }
+
+  initializeForm(eladasCsere: EladasCsere) {
+    this.eladasCsereUpdateForm.controls.partnerNameModify.setValue(eladasCsere.vevo);
+    this.eladasCsereUpdateForm.controls.sellDateModify.setValue(eladasCsere.datum);
+    this.eladasCsereUpdateForm.controls.commentModify.setValue(eladasCsere.megjegyzes);
+    this.eladasCsereUpdateForm.controls.sellPriceModify.setValue(String(eladasCsere.eladasi_ar));
+    this.eladasCsereUpdateForm.controls.transactionTypeModify.setValue(String(eladasCsere.tranzakcio_tipusa));
   }
 }

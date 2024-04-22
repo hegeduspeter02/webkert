@@ -6,7 +6,7 @@
   <mat-card-content>
     <mat-accordion>
       <mat-expansion-panel *ngFor="let eladasCsere of eladasCserek" (opened)="panelOpenState = true;
-      selectedEladasCsereId = eladasCsere.id" (closed)="panelOpenState = false">
+      selectedEladasCsereId = eladasCsere.id; initializeForm(eladasCsere)" (closed)="panelOpenState = false">
         <mat-expansion-panel-header>
           <mat-panel-title>
             <span *ngIf="eladasCsere.tranzakcio_tipusa == 1">Vevő neve: {{ eladasCsere.vevo }}</span>
@@ -19,7 +19,6 @@
               <span *ngIf="eladasCsere.tranzakcio_tipusa == 2">Csere</span>
           </span>
             <span>Ár: {{ eladasCsere.eladasi_ar }} Ft</span>
-            <span>Megjegyzés: {{ eladasCsere.megjegyzes }}</span>
             <span>Dátum: {{ eladasCsere.datum | date }}</span>
           </mat-panel-description>
 
@@ -41,10 +40,8 @@
               <span *ngIf="eladasCsere.tranzakcio_tipusa == 1">Eladási dátum</span>
               <span *ngIf="eladasCsere.tranzakcio_tipusa == 2">Csere dátum</span>
             </mat-label>
-            <input id="sellDateModify" matInput [matDatepicker]="picker"
-                   formControlName="sellDateModify">
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <input id="sellDateModify" matInput formControlName="sellDateModify">
+            <mat-icon matSuffix>calendar_month</mat-icon>
           </mat-form-field>
 
           <mat-form-field>
