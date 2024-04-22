@@ -1,7 +1,7 @@
-import {ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
 import {EladasCsere} from "../../Entities/EladasCsere";
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormArray, FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {EladasCsereService} from "../../Services/eladas-csere/eladas-csere.service";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {AsyncPipe, DatePipe, NgForOf, NgIf} from "@angular/common";
@@ -9,7 +9,6 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatIcon} from "@angular/material/icon";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
-import {map, Observable, of} from "rxjs";
 
 @Component({
   selector: 'app-update-delete',
@@ -36,17 +35,19 @@ import {map, Observable, of} from "rxjs";
   templateUrl: './update-delete.component.html',
   styleUrl: './update-delete.component.css'
 })
-export class UpdateDeleteComponent implements OnInit{
+export class UpdateDeleteComponent implements OnInit {
   eladasCsereService = inject(EladasCsereService);
   eladasCserek: EladasCsere[];
   panelOpenState = false;
 
   eladasCsereUpdateForm = this.formBuilder.group({
-    partnerNameModify: [''],
-    sellDateModify: [''],
-    sellPriceModify: [''],
-    commentModify: ['']
-  });
+      partnerNameModify: ['', Validators.required],
+      sellDateModify: ['', Validators.required],
+      commentModify: [''],
+      sellPriceModify: ['', Validators.required],
+      transactionTypeModify: ['', Validators.required]
+    }
+  );
 
   constructor(private formBuilder: FormBuilder) {
     this.eladasCserek = [];
@@ -58,5 +59,9 @@ export class UpdateDeleteComponent implements OnInit{
         return eladas_csere;
       });
     });
+  }
+
+  onSubmit() {
+
   }
 }

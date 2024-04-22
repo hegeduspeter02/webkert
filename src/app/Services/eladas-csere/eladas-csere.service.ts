@@ -47,4 +47,9 @@ export class EladasCsereService {
         return from(setDoc(docRef, newEladasCsere)).pipe(map(() => {
         }));
     }
+
+  updateEladasCsere(eladasCsere: EladasCsere): Observable<void>{
+    const docRef = doc(this.firestore, 'eladas_cserek', eladasCsere.id as string);
+    return from(updateDoc(docRef, eladasCsere.toPlainObject()));
+  }
 }
