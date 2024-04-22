@@ -7,15 +7,15 @@
       <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
         <div class="inputData">
           <div class="row">
-            Név: admin
+            Név: admin&#64;admin.hu
           </div>
           <div class="row">
-            Jelszó: admin
+            Jelszó: password
           </div>
         </div>
         <div class="row">
           <mat-form-field>
-            <input matInput placeholder="Felhasználónév" formControlName="username">
+            <input matInput placeholder="Email" formControlName="email">
             <mat-icon matSuffix>person</mat-icon>
           </mat-form-field>
         </div>

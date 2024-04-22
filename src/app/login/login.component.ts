@@ -6,6 +6,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {AuthService} from "../Services/auth/auth.service";
 import {CommonModule} from "@angular/common";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -28,17 +29,19 @@ export class LoginComponent {
   authService = inject(AuthService);
 
   loginForm = this.formBuilder.group({
-    username: ['', Validators.required],
+    email: ['', Validators.required],
     password: ['', Validators.required],
   });
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private router: Router) {
   }
 
   loginUser() {
     if (this.loginForm.valid) {
       console.log(this.loginForm.value)
     }
-    this.authService.login(String(this.loginForm.value.username), String(this.loginForm.value.password)).then(() => { console.log('login successful') });
+    this.authService.login(String(this.loginForm.value.email), String(this.loginForm.value.password)).then(() => {
+      this.router.navigate(['/']);
+    });
   }
 }

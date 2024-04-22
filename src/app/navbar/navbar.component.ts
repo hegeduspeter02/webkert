@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
-import {RouterLink, RouterLinkActive} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {MatToolbar, MatToolbarRow} from "@angular/material/toolbar";
-import {MatIcon} from "@angular/material/icon";
-import {MatButton, MatIconButton} from "@angular/material/button";
-import {MatSidenav, MatSidenavContainer} from "@angular/material/sidenav";
+import {AuthService} from "../Services/auth/auth.service";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-navbar',
@@ -13,10 +12,29 @@ import {MatSidenav, MatSidenavContainer} from "@angular/material/sidenav";
     RouterLinkActive,
     MatToolbar,
     MatToolbarRow,
+    NgIf,
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit{
+  loggedInUser?: firebase.default.User | null;
 
+  constructor(private authService: AuthService, private router: Router) { }
+
+  ngOnInit(): void {
+    this.authService.isUserLoggedIn().subscribe(user => {
+      this.loggedInUser = user;
+    });
+  }
+
+  isLoggedIn() {
+    return this.loggedInUser !== null;
+  }
+
+  logout() {
+    this.authService.logout().then(() => {
+      this.router.navigate(['/login']);
+    });
+  }
 }
