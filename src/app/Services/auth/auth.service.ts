@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import {map} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,12 @@ export class AuthService {
     return this.auth.createUserWithEmailAndPassword(email, password);
   }
 
-  isUserLoggedIn() {
+  getUser() {
     return this.auth.user;
+  }
+
+  isUserLoggedIn() {
+    return this.auth.authState.pipe(map(user => user !== null));
   }
 
   logout() {
