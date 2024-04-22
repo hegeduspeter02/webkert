@@ -1,10 +1,15 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
 import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
 import {EladasCsere} from "../../Entities/EladasCsere";
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {EladasCsereService} from "../../Services/eladas-csere/eladas-csere.service";
 import {MatExpansionModule} from "@angular/material/expansion";
-import {DatePipe, NgForOf} from "@angular/common";
+import {AsyncPipe, DatePipe, NgForOf, NgIf} from "@angular/common";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatIcon} from "@angular/material/icon";
+import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
+import {map, Observable, of} from "rxjs";
 
 @Component({
   selector: 'app-update-delete',
@@ -16,7 +21,17 @@ import {DatePipe, NgForOf} from "@angular/common";
     MatCardContent,
     MatExpansionModule,
     NgForOf,
-    DatePipe
+    DatePipe,
+    NgIf,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatIcon,
+    ReactiveFormsModule,
+    MatDatepicker,
+    MatDatepickerInput,
+    MatDatepickerToggle,
+    AsyncPipe
   ],
   templateUrl: './update-delete.component.html',
   styleUrl: './update-delete.component.css'
@@ -25,6 +40,13 @@ export class UpdateDeleteComponent implements OnInit{
   eladasCsereService = inject(EladasCsereService);
   eladasCserek: EladasCsere[];
   panelOpenState = false;
+
+  eladasCsereUpdateForm = this.formBuilder.group({
+    partnerNameModify: [''],
+    sellDateModify: [''],
+    sellPriceModify: [''],
+    commentModify: ['']
+  });
 
   constructor(private formBuilder: FormBuilder) {
     this.eladasCserek = [];

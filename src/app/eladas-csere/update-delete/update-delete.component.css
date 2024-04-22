@@ -13,7 +13,13 @@ mat-card-content{
 mat-accordion{
   width: 100%;
 }
+mat-expansion-panel{
+  background: #e2e2e2;
+}
 mat-panel-description{
   display: flex;
   justify-content: space-between;
+}
+.mat-mdc-form-field {
+  margin-left: 8px;
 }

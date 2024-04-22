@@ -6,19 +6,57 @@
     <mat-accordion>
       <mat-expansion-panel *ngFor="let eladasCsere of eladasCserek" (opened)="panelOpenState = true"
                            (closed)="panelOpenState = false">
-        <mat-expansion-panel-header>
+        <mat-expansion-panel-header >
           <mat-panel-title>
-            Vevő neve: {{ eladasCsere.vevo }}
+              <span *ngIf="eladasCsere.tranzakcio_tipusa == 1">Vevő neve: {{ eladasCsere.vevo }}</span>
+              <span *ngIf="eladasCsere.tranzakcio_tipusa == 2">Partner neve: {{ eladasCsere.vevo }}</span>
           </mat-panel-title>
 
           <mat-panel-description>
-            <span>Típusa: {{ eladasCsere.tranzakcio_tipusa }}</span>
-            <span>Ár: {{ eladasCsere.eladasi_ar }}</span>
+          <span>Típusa:
+              <span *ngIf="eladasCsere.tranzakcio_tipusa == 1">Eladás</span>
+              <span *ngIf="eladasCsere.tranzakcio_tipusa == 2">Csere</span>
+          </span>
+            <span>Ár: {{ eladasCsere.eladasi_ar }} Ft</span>
             <span>Dátum: {{ eladasCsere.datum | date }}</span>
           </mat-panel-description>
 
         </mat-expansion-panel-header>
-        <p>I'm visible because I am open</p>
+
+          <mat-form-field>
+              <mat-label>
+                  <span *ngIf="eladasCsere.tranzakcio_tipusa == 1">Vevő neve</span>
+                  <span *ngIf="eladasCsere.tranzakcio_tipusa == 2">Partner neve</span>
+              </mat-label>
+              <input id="partnerNameModify" value="{{ eladasCsere.vevo }}" type="text" formControlName="partnerNameModify" matInput>
+              <mat-icon matSuffix>handshake</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field>
+              <mat-label>
+                  <span *ngIf="eladasCsere.tranzakcio_tipusa == 1">Eladási dátum</span>
+                  <span *ngIf="eladasCsere.tranzakcio_tipusa == 2">Csere dátum</span>
+              </mat-label>
+              <input id="sellDateModify" value="{{ eladasCsere.datum }}" matInput [matDatepicker]="picker" formControlName="sellDateModify">
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field>
+              <mat-label>
+                  <span *ngIf="eladasCsere.tranzakcio_tipusa == 1">Eladási ár</span>
+                  <span *ngIf="eladasCsere.tranzakcio_tipusa == 2">Csere ár</span>
+              </mat-label>
+              <input id="sellPriceModify" type="number" value="{{ eladasCsere.eladasi_ar }}" formControlName="sellPriceModify" matInput #price>
+              <mat-hint align="end">{{ price.value }} Ft</mat-hint>
+              <mat-icon matSuffix>payments</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field>
+              <mat-label>Megjegyzés</mat-label>
+              <textarea id="commentModify" value="{{eladasCsere.megjegyzes}}" formControlName="commentModify" matInput></textarea>
+          </mat-form-field>
+
       </mat-expansion-panel>
     </mat-accordion>
   </mat-card-content>
