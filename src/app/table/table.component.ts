@@ -52,7 +52,7 @@ export class TableComponent implements OnInit {
     beforeRemoveRow: this.deleteTableData.bind(this),
     beforeCreateRow: this.addTableRow.bind(this),
     afterChange: this.updateTableData.bind(this),
-    colWidths: [110, 200, 200, 220, 300, 130, 100, 100, 140, 130, 150, 150, 75, 200, 150, 180, 200, 170, 180, 200, 180, 150, 200],
+    colWidths: [110, 200, 200, 220, 300, 130, 100, 100, 140, 130, 150, 150, 75, 200, 150, 180, 200, 170, 180, 200, 180, 150, 300],
   };
 
   ngOnInit(): void {

@@ -1,1 +1,30 @@
-<p>about works!</p>
+<div class="aboutPage">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Leírás a weboldalról</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      Az oldal célja egy gyufacímke gyűjtemény nyilvántartására alkalmas rendszer biztosítása, amely a családtagomnak
+      jelentene a jövőben segítséget. Elvárás volt hogy Excel szerűen lehessen adatot rögzíteni, módosítani, törölni, amit
+      sikerült megvalósítanom a handsontable JS library segítségével. Az adat beszúrásához, törléséhez jobb klikk a cellára,
+      ott a menüből lehet kiválasztani a műveletet. Az oszlopokat lehet rendezni, elrejteni, valamint komplexebb szűrőket
+      is lehet beállítani. A mentés auto-save módon működik, a cellák módosítása után egyből mentés történik a firebase
+      adatbázisba. A képek megjelenítési mérete Méret x oszlop alapján változik.
+      <div class="row">
+        A címkék eladását, cseréjét is nyomon lehet követni, erre szolgál az Eladás/csere oldal. Az itt rögzített
+        adatokat a nyilvántartás tábla utolsó oszlopában lehet legördülő menüből kiválasztani.
+      </div>
+      <div class="row">
+      Az oldal a Firebase Auth rendszerét használja a felhasználók bejelentkeztetésére, valamint Auth Guarddal
+      van védve a nyilvántartás és az eladás/csere oldal. Mivel ez egy egyfelhasználós rendszer, regisztrációra nincs
+      lehetőség.
+      </div>
+      <div class="row">
+        Egy javasolt pontozás:
+      </div>
+      <div class="row">
+        <img ngSrc="assets/images/scoring-sheet.jpg" alt="Értékelési táblázat" height="670" width="988" priority>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
